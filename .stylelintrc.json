@@ -16,8 +16,8 @@
     "color-named": "always-where-possible",
     "declaration-no-important": true,
     "function-url-no-scheme-relative": true,
-    "selector-no-id": true,
-    "selector-no-type": true,
-    "selector-no-universal": true
+    "selector-max-id": 0,
+    "selector-max-type": 0,
+    "selector-max-universal": 0
   }
 }
