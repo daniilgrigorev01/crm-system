@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "plugins": [
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
+  "rules": {
+    "plugin/rational-order": [
+      true,
+      {
+        "border-in-box-model": true
+      }
+    ],
+    "color-named": "always-where-possible",
+    "declaration-no-important": true,
+    "function-url-no-scheme-relative": true,
+    "selector-no-id": true,
+    "selector-no-type": true,
+    "selector-no-universal": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "crm-system",
+  "version": "1.0.0",
+  "description": "Учебный проект - CRM-система",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:css": "stylelint \"client/css/**/*.css\" --fix"
+  },
+  "author": "Daniil Grigorev",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "3.0.2",
+    "stylelint": "^15.10.3",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-order": "^6.0.3"
+  }
+}
