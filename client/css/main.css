@@ -1,4 +1,66 @@
+@font-face {
+  font-weight: 400;
+  font-family: 'Open Sans';
+  src: local('Open Sans'),
+  url('../fonts/opensans-regular-webfont.woff2') format('woff2'),
+  url('../fonts/opensans-regular-webfont.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Open Sans';
+  src: local('Open Sans'),
+  url('../fonts/opensans-bold-webfont.woff2') format('woff2'),
+  url('../fonts/opensans-bold-webfont.woff') format('woff');
+  font-display: swap;
+}
+
+:root {
+  --background-color-table: white;
+  --border-color-table: #c8c5d1;
+  --color-main-text: #333;
+}
+
+:focus {
+  outline: none;
+}
+
+.body {
+  color: var(--color-main-text);
+  font-size: 14px;
+  font-family: 'Open Sans', Arial, sans-serif;
+}
+
 .visually-hidden {
   position: fixed;
   transform: scale(0);
+}
+
+.btn-reset {
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  background: transparent;
+  cursor: pointer;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+@media (width >= 768px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (width >= 1024px) {
+  .container {
+    max-width: 984px;
+  }
 }
