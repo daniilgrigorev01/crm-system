@@ -122,9 +122,17 @@
           <input type='tel' name='phone' aria-label='Номер телефона' />
         </div>
 
-        <button type='submit' class='btn-reset modal-form__save-btn'>Сохранить</button>
+        <button type='submit' class='btn-reset modal__main-btn'>Сохранить</button>
       </form>
-      <button class='btn-reset modal-form__close-btn'>Отмена</button>
+      <button class='btn-reset modal__btn-cancel'>Отмена</button>
+    </dialog>
+
+    <dialog class='modal' id='modalDelete'>
+      <h2 class='modal__title modal__title--delete'>Удалить клиента</h2>
+      <button class='btn-reset modal__btn-close'></button>
+      <p class='modal__descr'>Вы действительно хотите удалить данного клиента?</p>
+      <button class='btn-reset modal__main-btn' id='deleteClientBtn'>Удалить</button>
+      <button class='btn-reset modal__btn-cancel'>Отмена</button>
     </dialog>
   </div>
 </main>

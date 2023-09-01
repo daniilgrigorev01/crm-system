@@ -1,15 +1,14 @@
 // Импортируем функции
-import { getClientList } from './serverFunctions.js';
+import { serverGetClientList } from './serverFunctions.js';
 import { renderTableClient } from './renderTableFunctions.js';
 
 async function initialApp() {
   const SERVER__ADDRESS = 'http://localhost:3000';
 
-  let clientList = [];
+  const clientList = await serverGetClientList(SERVER__ADDRESS);
 
-  clientList = await getClientList(SERVER__ADDRESS);
   if (clientList.length !== 0) {
-    renderTableClient(clientList);
+    renderTableClient(SERVER__ADDRESS, clientList);
   }
 }
 

@@ -1,13 +1,15 @@
 // Импортируем функции
 import { formatDate, formatTime, getIconContact } from './helpers.js';
+import { serverDeleteClient } from './serverFunctions.js';
 
 /**
  * Создаёт строку таблицы на основе данных клиента, полученных в объекте.
  *
  * @param {object} obj - Объект с данными клиента.
+ * @param {string} host - URL сервера, на котором размещено API.
  * @returns {HTMLTableRowElement} - Строка таблицы с данными клиента.
  */
-function createClientRow(obj) {
+function createClientRow(host, obj) {
   const row = document.createElement('tr');
   const cellId = document.createElement('td');
   const cellName = document.createElement('td');
@@ -74,6 +76,21 @@ function createClientRow(obj) {
 
   row.append(cellId, cellName, cellCreationDate, cellLastModifiedDate, cellContacts, cellBtns);
 
+  deleteBtn.addEventListener('click', () => {
+    const modal = document.getElementById('modalDelete');
+    const deleteBtn = document.getElementById('deleteClientBtn');
+
+    modal.showModal();
+
+    deleteBtn.addEventListener('click', async () => {
+      await serverDeleteClient(host, obj.id);
+
+      row.remove();
+
+      modal.close();
+    });
+  });
+
   return row;
 }
 
@@ -81,14 +98,15 @@ function createClientRow(obj) {
  * Создаёт таблицу клиентов на основе массива объектов с данными.
  *
  * @param {Array<object>} arr - Массив объектов.
+ * @param {string} host - URL сервера, на котором размещено API.
  */
-function renderTableClient(arr) {
+function renderTableClient(host, arr) {
   const tableClient = document.getElementById('tableClients');
 
   tableClient.innerHTML = '';
 
   for (const item of arr) {
-    const rowClient = createClientRow(item);
+    const rowClient = createClientRow(host, item);
 
     tableClient.append(rowClient);
   }

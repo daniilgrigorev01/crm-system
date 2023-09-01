@@ -2,9 +2,9 @@
  * Выполняет GET-запрос к указанному серверу и возвращает список клиентов.
  *
  * @param {string} host - URL сервера, на котором размещено API.
- * @returns {Promise<any>} - Массив объектов.
+ * @returns {Promise<any>}
  */
-async function getClientList(host) {
+async function serverGetClientList(host) {
   const response = await fetch(host + '/api/clients', {
     method: 'GET',
     headers: {
@@ -22,7 +22,7 @@ async function getClientList(host) {
  * @param {object} obj - Объект с данными нового клиента.
  * @returns {Promise<object>} - Объект нового клиента.
  */
-async function addNewClient(host, obj) {
+async function serverAddNewClient(host, obj) {
   const response = await fetch(host + '/api/clients', {
     method: 'POST',
     headers: {
@@ -34,5 +34,20 @@ async function addNewClient(host, obj) {
   return await response.json();
 }
 
+/**
+ * Выполняет запрос к указанному серверу и удаляет объект клиента с совпадающим ID.
+ *
+ * @param {string} host - URL сервера, на котором размещено API.
+ * @param {string} id - ID клиента, объект которого необходимо удалить с сервера.
+ * @returns {Promise<any>}
+ */
+async function serverDeleteClient(host, id) {
+  const response = await fetch(host + '/api/clients/' + id, {
+    method: 'DELETE',
+  });
+
+  return await response.json();
+}
+
 // Экспортируем функции
-export { getClientList, addNewClient };
+export { serverGetClientList, serverAddNewClient, serverDeleteClient };
