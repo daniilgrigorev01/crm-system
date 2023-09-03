@@ -107,7 +107,7 @@
       </table>
     </div>
 
-    <dialog class='modal'>
+    <dialog class='modal' id='modalAddNewClient'>
       <h2 class='modal__title'>Новый клиент</h2>
       <button class='btn-reset modal__btn-close'></button>
       <form class='modal__form modal-form' id='formAddNewClient'>
@@ -119,10 +119,11 @@
         <input type='text' name='patronymic' class='modal-form__input' id='inputNewClientPatronymic' />
 
         <div class='modal-form__contacts'>
-          <input type='tel' name='phone' aria-label='Номер телефона' />
+          <input class='modal-form__contact-input' type='tel' name='phone' aria-label='Телефон' />
+          <input class='modal-form__contact-input' type='email' name='email' aria-label='Email' />
         </div>
 
-        <button type='submit' class='btn-reset modal__main-btn'>Сохранить</button>
+        <button type='submit' class='btn-reset modal__main-btn' id='addClientBtn'>Сохранить</button>
       </form>
       <button class='btn-reset modal__btn-cancel'>Отмена</button>
     </dialog>

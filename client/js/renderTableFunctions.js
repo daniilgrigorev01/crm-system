@@ -1,6 +1,6 @@
 // Импортируем функции
 import { formatDate, formatTime, getIconContact } from './helpers.js';
-import { serverDeleteClient } from './serverFunctions.js';
+import { deleteClient } from './deleteClientFunction.js';
 
 /**
  * Создаёт строку таблицы на основе данных клиента, полученных в объекте.
@@ -77,18 +77,7 @@ function createClientRow(host, obj) {
   row.append(cellId, cellName, cellCreationDate, cellLastModifiedDate, cellContacts, cellBtns);
 
   deleteBtn.addEventListener('click', () => {
-    const modal = document.getElementById('modalDelete');
-    const deleteBtn = document.getElementById('deleteClientBtn');
-
-    modal.showModal();
-
-    deleteBtn.addEventListener('click', async () => {
-      await serverDeleteClient(host, obj.id);
-
-      row.remove();
-
-      modal.close();
-    });
+    deleteClient(host, obj.id, row);
   });
 
   return row;
