@@ -1,5 +1,6 @@
-import { serverAddNewClient, serverGetClientList } from './serverFunctions.js';
+import { serverAddNewClient, serverGetClienstList } from './serverFunctions.js';
 import { renderTableClient } from './renderTableFunctions.js';
+import { setContactInput } from './helpers.js';
 
 /**
  * Создаёт объект на основе данных, полученных из формы добавления клиента.
@@ -11,7 +12,7 @@ function createObjectNewClient(form) {
   const surnameClient = document.getElementById('inputNewClientSurname');
   const nameClient = document.getElementById('inputNewClientName');
   const patronymicClient = document.getElementById('inputNewClientPatronymic');
-  const contactsInput = form.querySelector('.modal-form__contacts').querySelectorAll('.modal-form__contact-input');
+  const contactsInput = form.querySelector('.modal-form__contacts').querySelectorAll('.modal-form-contacts__input');
 
   const client = {};
 
@@ -52,7 +53,7 @@ async function addNewClient(host, form, arr) {
 
     await serverAddNewClient(host, createObjectNewClient(form));
 
-    arr = await serverGetClientList(host);
+    arr = await serverGetClienstList(host);
 
     renderTableClient(host, arr);
 
@@ -69,6 +70,8 @@ function openModalAddClient() {
 
   btnAddClient.addEventListener('click', () => {
     modal.showModal();
+
+    setContactInput(modal);
   });
 }
 

@@ -1,6 +1,7 @@
 // Импортируем функции
 import { formatDate, formatTime, getIconContact } from './helpers.js';
 import { deleteClient } from './deleteClientFunction.js';
+import { getChangeClient, setChangeClient } from './changeClientFunctions.js';
 
 /**
  * Создаёт строку таблицы на основе данных клиента, полученных в объекте.
@@ -75,6 +76,11 @@ function createClientRow(host, obj) {
   cellBtns.append(changeBtn, deleteBtn);
 
   row.append(cellId, cellName, cellCreationDate, cellLastModifiedDate, cellContacts, cellBtns);
+
+  changeBtn.addEventListener('click', async () => {
+    await getChangeClient(host, obj.id);
+    await setChangeClient(host, obj);
+  });
 
   deleteBtn.addEventListener('click', () => {
     deleteClient(host, obj.id, row);
