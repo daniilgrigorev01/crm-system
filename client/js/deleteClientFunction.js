@@ -9,7 +9,7 @@ import { serverDeleteClient } from './serverFunctions.js';
  * @param {HTMLTableRowElement} row - Строка таблицы с данными клиента.
  */
 function deleteClient(host, id, row) {
-  const modal = document.getElementById('modalDelete');
+  const modal = document.getElementById('modalDeleteClient');
   const deleteBtn = document.getElementById('deleteClientBtn');
 
   modal.showModal();
