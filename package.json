@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:css": "stylelint \"client/css/**/*.css\" --fix"
+    "lint:css": "stylelint \"client/css/**/*.css\" --fix",
+    "lint:js": "eslint --fix \"client/js/**/*.js\"",
+    "tailwindcss": "tailwindcss -i client/css/base.css -o client/css/main.css --watch"
   },
   "author": "Daniil Grigorev",
   "license": "ISC",
@@ -17,9 +19,11 @@
     "eslint-plugin-n": "^16.0.2",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "3.0.2",
+    "prettier-plugin-tailwindcss": "^0.5.4",
     "stylelint": "^15.10.3",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^34.0.0",
-    "stylelint-order": "^6.0.3"
+    "stylelint-order": "^6.0.3",
+    "tailwindcss": "^3.3.3"
   }
 }
