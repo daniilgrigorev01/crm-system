@@ -1,5 +1,6 @@
 // Импортируем функции
 import { serverDeleteClient } from './serverFunctions.js';
+import { closeModal } from './helpers.js';
 
 /**
  * Удаляет объект клиента с сервера по переданному ID и строку с данными из таблицы.
@@ -10,9 +11,11 @@ import { serverDeleteClient } from './serverFunctions.js';
  */
 function deleteClient(host, id, row) {
   const modal = document.getElementById('modalDeleteClient');
-  const deleteBtn = document.getElementById('deleteClientBtn');
+  const deleteBtn = modal.querySelector('.action-btn');
 
   modal.showModal();
+
+  closeModal(modal);
 
   deleteBtn.addEventListener('click', async () => {
     await serverDeleteClient(host, id);
