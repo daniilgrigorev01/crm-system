@@ -12,6 +12,7 @@
   "author": "Daniil Grigorev",
   "license": "ISC",
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.6",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",

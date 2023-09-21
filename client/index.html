@@ -1,152 +1,249 @@
 <!doctype html>
-<html lang='ru'>
-<head>
-  <meta charset='UTF-8' />
-  <meta http-equiv='X-UA-Compatible' content='ie=edge' />
-  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel='stylesheet' href='css/main.css' />
+    <link rel="stylesheet" href="css/main.css" />
 
-  <script type='module' src='js/main.js'></script>
+    <script type="module" src="js/main.js"></script>
 
-  <title>CRM-система</title>
-</head>
-<body class='font-body bg-[#f5f5f5] text-sm text-black'>
-<header
-  class='mb-[30px] flex h-10 flex-wrap content-center justify-center bg-white shadow-[0_3.38629px_5.64383px_0px_rgba(176,190,197,0.32),_0px_9.03012px_27.09036px_0px_rgba(176,190,197,0.32)] lg:container md:mb-10 md:h-[90px] md:items-center md:justify-start md:px-5 lg:mx-auto'
->
-  <a class='block w-6 md:mr-12 md:w-[50px]'>
-    <img src='./img/logo.png' alt='Skillbus' />
-  </a>
-  <input
-    class='placeholder-txt_grey hidden border border-[rgba(51,51,51,0.20)] px-4 py-3 md:inline-block md:h-11 md:w-[580px]'
-    type='text'
-    placeholder='Введите запрос'
-    aria-label='Поиск по таблице'
-  />
-</header>
-<main class='px-5 lg:container lg:mx-auto'>
-  <h1 class='visually-hidden'>CRM-система</h1>
-  <h2 class='mb-[5px] text-lg font-bold md:mb-2.5 md:text-2xl'>Клиенты</h2>
-  <div class='mb-10 max-h-[300px] overflow-auto'>
-    <table class='mx-auto w-[728px] table-fixed border-collapse lg:w-[984px]'>
-      <thead class='sticky top-0 z-10 bg-[#f5f5f5]'>
-      <tr>
-        <th class='align-bottom pb-2.5 text-txt_grey text-xs font-normal w-[72px] pl-5 text-left lg:w-20'
-            data-sorting='true'>
-          ID
-          <svg
-            class='opacity-70 -ml-[3px] inline-block'
-            xmlns='http://www.w3.org/2000/svg'
-            width='12'
-            height='12'
-            fill='none'
-          >
-            <g clip-path='url(#a)'>
-              <path fill='#9873FF' d='m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z' />
-            </g>
-            <defs>
-              <clipPath id='a'>
-                <path fill='#fff' d='M0 0h12v12H0z' />
-              </clipPath>
-            </defs>
-          </svg>
-        </th>
-        <th class='align-bottom pb-2.5 text-txt_grey text-xs font-normal w-56 pl-2.5 text-left lg:w-[235px]'
-            data-sorting='false'>
-          Фамилия Имя Отчество
-          <svg
-            class='opacity-70 -ml-[3px] inline-block'
-            xmlns='http://www.w3.org/2000/svg'
-            width='12'
-            height='12'
-            fill='none'
-          >
-            <g clip-path='url(#a)'>
-              <path fill='#9873FF' d='m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z' />
-            </g>
-            <defs>
-              <clipPath id='a'>
-                <path fill='#fff' d='M0 0h12v12H0z' />
-              </clipPath>
-            </defs>
-          </svg>
-          <span class='text-txt_grey -ml-[3px] text-[10px] font-semibold'>А-Я</span>
-        </th>
-        <th class='align-bottom pb-2.5 text-txt_grey text-xs font-normal relative w-24 text-left lg:w-40 lg:pl-2.5'
-            data-sorting='false'>
-          Дата и время<br />создания
-          <svg
-            class='opacity-70 absolute bottom-[10px] lg:left-16 left-14 inline-block'
-            xmlns='http://www.w3.org/2000/svg'
-            width='12'
-            height='12'
-            fill='none'
-          >
-            <g clip-path='url(#a)'>
-              <path fill='#9873FF' d='m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z' />
-            </g>
-            <defs>
-              <clipPath id='a'>
-                <path fill='#fff' d='M0 0h12v12H0z' />
-              </clipPath>
-            </defs>
-          </svg>
-        </th>
-        <th class='align-bottom pb-2.5 text-txt_grey text-xs font-normal relative w-24 text-left lg:w-40 lg:pl-2.5'
-            data-sorting='false'>
-          Последние<br />изменения
-          <svg
-            class='opacity-70 absolute bottom-[10px] inline-block'
-            xmlns='http://www.w3.org/2000/svg'
-            width='12'
-            height='12'
-            fill='none'
-          >
-            <g clip-path='url(#a)'>
-              <path fill='#9873FF' d='m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z' />
-            </g>
-            <defs>
-              <clipPath id='a'>
-                <path fill='#fff' d='M0 0h12v12H0z' />
-              </clipPath>
-            </defs>
-          </svg>
-        </th>
-        <th class='align-bottom pb-2.5 text-txt_grey w-28 text-left text-xs font-normal'>Контакты</th>
-        <th class='align-bottom pb-2.5 text-txt_grey px-5 text-left text-xs font-normal'>Действия</th>
-      </tr>
-      </thead>
-      <tbody class='divide-y divide-[#c8c5d1]' id='tableClients'></tbody>
-    </table>
-  </div>
-
-  <dialog class='dialog w-[300px] md:w-[450px]' id='modalDeleteClient'>
-    <div class='py-5 flex flex-col items-center px-[12px] relative md:px-20'>
-      <button class='close-btn absolute top-3 right-3 md:top-5 md:right-5'>
-        <svg xmlns='http://www.w3.org/2000/svg' xml:space='preserve' width='16.466' height='16.466'
-             viewBox='311.767 311.767 16.466 16.466'>
-        <path fill='#b0b0b0' fill-rule='evenodd'
-              d='m327.733 313.233-.966-.966-6.767 6.766-6.767-6.766-.966.966 6.766 6.767-6.766 6.767.966.966 6.767-6.766 6.767 6.766.966-.966-6.766-6.767 6.766-6.767Z' />
-      </svg>
-      </button>
-      <h2 class='text-lg font-bold mb-2.5'>Удалить клиента</h2>
-      <p class='text-center mb-6'>Вы действительно хотите удалить данного клиента?</p>
-      <button class='font-semibold text-white py-4 px-9 bg-firm mb-2.5 action-btn'>Удалить</button>
-      <button class='text-xs underline cancel-btn'>Отмена</button>
-    </div>
-  </dialog>
-</main>
-<footer class='container mx-auto flex justify-center'>
-  <button class='text-firm border-firm flex items-center border px-6 py-3 font-semibold'>
-    <svg class='mr-2.5' xmlns='http://www.w3.org/2000/svg' width='23' height='16' fill='none'>
-      <path
-        fill='#9873FF'
-        d='M14.5 8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm-9-2V3h-2v3h-3v2h3v3h2V8h3V6h-3Zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z'
+    <title>CRM-система</title>
+  </head>
+  <body class="bg-[#f5f5f5] font-body text-sm text-black">
+    <header
+      class="mb-[30px] flex h-10 flex-wrap content-center justify-center bg-white shadow-[0_3.38629px_5.64383px_0px_rgba(176,190,197,0.32),_0px_9.03012px_27.09036px_0px_rgba(176,190,197,0.32)] lg:container md:mb-10 md:h-[90px] md:items-center md:justify-start md:px-5 lg:mx-auto"
+    >
+      <a class="block w-6 md:mr-12 md:w-[50px]">
+        <img src="./img/logo.png" alt="Skillbus" />
+      </a>
+      <input
+        class="hidden border border-[rgba(51,51,51,0.20)] px-4 py-3 placeholder-txt_grey md:inline-block md:h-11 md:w-[580px]"
+        type="text"
+        placeholder="Введите запрос"
+        aria-label="Поиск по таблице"
       />
-    </svg>
-    Добавить клиента
-  </button>
-</footer>
-</body>
+    </header>
+    <main class="px-5 lg:container lg:mx-auto">
+      <h1 class="visually-hidden">CRM-система</h1>
+      <h2 class="mb-[5px] text-lg font-bold md:mb-2.5 md:text-2xl">Клиенты</h2>
+      <div class="mb-10 max-h-[300px] overflow-auto">
+        <table class="mx-auto w-[728px] table-fixed border-collapse lg:w-[984px]">
+          <thead class="sticky top-0 z-10 bg-[#f5f5f5]">
+            <tr>
+              <th
+                class="w-[72px] pb-2.5 pl-5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-20"
+                data-sorting="true"
+              >
+                ID
+                <svg
+                  class="-ml-[3px] inline-block opacity-70"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="none"
+                >
+                  <g clip-path="url(#a)">
+                    <path fill="#9873FF" d="m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="a">
+                      <path fill="#fff" d="M0 0h12v12H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </th>
+              <th
+                class="w-56 pb-2.5 pl-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-[235px]"
+                data-sorting="false"
+              >
+                Фамилия Имя Отчество
+                <svg
+                  class="-ml-[3px] inline-block opacity-70"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="none"
+                >
+                  <g clip-path="url(#a)">
+                    <path fill="#9873FF" d="m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="a">
+                      <path fill="#fff" d="M0 0h12v12H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span class="-ml-[3px] text-[10px] font-semibold text-txt_grey">А-Я</span>
+              </th>
+              <th
+                class="relative w-24 pb-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-40 lg:pl-2.5"
+                data-sorting="false"
+              >
+                Дата и время<br />создания
+                <svg
+                  class="absolute bottom-[10px] left-14 inline-block opacity-70 lg:left-16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="none"
+                >
+                  <g clip-path="url(#a)">
+                    <path fill="#9873FF" d="m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="a">
+                      <path fill="#fff" d="M0 0h12v12H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </th>
+              <th
+                class="relative w-24 pb-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-40 lg:pl-2.5"
+                data-sorting="false"
+              >
+                Последние<br />изменения
+                <svg
+                  class="absolute bottom-[10px] inline-block opacity-70"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="none"
+                >
+                  <g clip-path="url(#a)">
+                    <path fill="#9873FF" d="m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="a">
+                      <path fill="#fff" d="M0 0h12v12H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </th>
+              <th class="w-28 pb-2.5 text-left align-bottom text-xs font-normal text-txt_grey">Контакты</th>
+              <th class="px-5 pb-2.5 text-left align-bottom text-xs font-normal text-txt_grey">Действия</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#c8c5d1]" id="tableClients"></tbody>
+        </table>
+      </div>
+
+      <dialog class="w-[300px] backdrop:bg-[rgba(51,51,51,0.6)] md:w-[450px]" id="modalAddNewClient">
+        <div class="relative flex flex-col items-center px-[12px] py-5 md:px-7">
+          <button class="close-btn absolute right-3 top-3 md:right-5 md:top-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              width="16.466"
+              height="16.466"
+              viewBox="311.767 311.767 16.466 16.466"
+            >
+              <path
+                fill="#b0b0b0"
+                fill-rule="evenodd"
+                d="m327.733 313.233-.966-.966-6.767 6.766-6.767-6.766-.966.966 6.766 6.767-6.766 6.767.966.966 6.767-6.766 6.767 6.766.966-.966-6.766-6.767 6.766-6.767Z"
+              />
+            </svg>
+          </button>
+          <h2 class="mb-8 self-start text-lg font-bold">Новый клиент</h2>
+          <form method="dialog" id="formAddNewClient" class="flex w-full flex-col">
+            <div class="relative mb-8 flex">
+              <label for="surnameNewClient" class="absolute top-[6px] text-txt_grey"
+                >Фамилия<span class="text-firm">*</span></label
+              >
+              <input
+                type="text"
+                name="surnameNewClient"
+                id="surnameNewClient"
+                class="w-full border-x-0 border-b border-t-0 border-grey px-0 py-1"
+              />
+            </div>
+            <div class="relative mb-8 flex">
+              <label for="nameNewClient" class="absolute top-[6px] text-txt_grey"
+                >Имя<span class="text-firm">*</span></label
+              >
+              <input
+                type="text"
+                name="nameNewClient"
+                id="nameNewClient"
+                class="w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+              />
+            </div>
+            <div class="relative mb-6 flex">
+              <label for="patronymicNewClient" class="absolute top-[6px] text-txt_grey">Отчество</label>
+              <input
+                type="text"
+                name="patronymicNewClient"
+                id="patronymicNewClient"
+                class="w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+              />
+            </div>
+            <div class="-mx-[12px] mb-2 bg-[rgba(200,197,209,0.2)] px-3.5 py-2 md:-mx-7 md:px-7">
+              <div class="modal-block-contacts relative flex flex-col">
+                <div class="modal-block-contacts__wrapper"></div>
+                <button type="button" class="modal-btn-add-contact flex items-center justify-center font-semibold">
+                  <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                    <g clip-path="url(#z)">
+                      <path
+                        fill="#9873FF"
+                        d="M8 4.667c-.367 0-.667.3-.667.666v2h-2c-.366 0-.666.3-.666.667 0 .367.3.667.666.667h2v2c0 .366.3.666.667.666.367 0 .667-.3.667-.666v-2h2c.366 0 .666-.3.666-.667 0-.367-.3-.667-.666-.667h-2v-2c0-.366-.3-.666-.667-.666Zm0-3.334A6.67 6.67 0 0 0 1.333 8 6.67 6.67 0 0 0 8 14.667 6.67 6.67 0 0 0 14.667 8 6.67 6.67 0 0 0 8 1.333Zm0 12A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333Z"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="z">
+                        <path fill="#fff" d="M0 0h16v16H0z" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  Добавить контакт
+                </button>
+              </div>
+            </div>
+
+            <p class="error-text text-center text-[10px] text-red-600"></p>
+
+            <button type="submit" class="action-btn mb-2.5 mt-2 self-center bg-firm px-9 py-3 font-semibold text-white">
+              Сохранить
+            </button>
+            <button class="cancel-btn text-xs underline" type="reset">Отмена</button>
+          </form>
+        </div>
+      </dialog>
+      <dialog class="w-[300px] backdrop:bg-[rgba(51,51,51,0.6)] md:w-[450px]" id="modalDeleteClient">
+        <div class="relative flex flex-col items-center px-[12px] py-5 md:px-20">
+          <button class="close-btn absolute right-3 top-3 md:right-5 md:top-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              width="16.466"
+              height="16.466"
+              viewBox="311.767 311.767 16.466 16.466"
+            >
+              <path
+                fill="#b0b0b0"
+                fill-rule="evenodd"
+                d="m327.733 313.233-.966-.966-6.767 6.766-6.767-6.766-.966.966 6.766 6.767-6.766 6.767.966.966 6.767-6.766 6.767 6.766.966-.966-6.766-6.767 6.766-6.767Z"
+              />
+            </svg>
+          </button>
+          <h2 class="mb-2.5 text-lg font-bold">Удалить клиента</h2>
+          <p class="mb-6 text-center">Вы действительно хотите удалить данного клиента?</p>
+          <button class="action-btn mb-2.5 bg-firm px-9 py-3 font-semibold text-white">Удалить</button>
+          <button class="cancel-btn text-xs underline">Отмена</button>
+        </div>
+      </dialog>
+    </main>
+    <footer class="container mx-auto flex justify-center">
+      <button class="flex items-center border border-firm px-6 py-3 font-semibold text-firm" id="btnAddNewClient">
+        <svg class="mr-2.5" xmlns="http://www.w3.org/2000/svg" width="23" height="16" fill="none">
+          <path
+            fill="#9873FF"
+            d="M14.5 8c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4Zm-9-2V3h-2v3h-3v2h3v3h2V8h3V6h-3Zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z"
+          />
+        </svg>
+        Добавить клиента
+      </button>
+    </footer>
+  </body>
 </html>

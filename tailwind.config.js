@@ -7,14 +7,15 @@ module.exports = {
         txt_grey: '#b0b0b0',
         black: '#333',
         firm: '#9873ff',
+        grey: '#c8c5d1',
       },
       spacing: {
-        '15': '3.75rem',
+        15: '3.75rem',
       },
     },
     fontFamily: {
       body: ['Open Sans', 'Arial', 'sans-serif'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };

@@ -23,15 +23,27 @@ async function serverGetClienstList(host) {
  * @returns {Promise<Object>} - Объект нового клиента.
  */
 async function serverAddNewClient(host, obj) {
-  const response = await fetch(host + '/api/clients', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  });
+  try {
+    const response = await fetch(host + '/api/clients', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    });
 
-  return await response.json();
+    const result = await response.json();
+
+    if (!response.ok) {
+      result.errors.forEach((error) => {
+        throw new Error(error.message);
+      });
+    }
+
+    return result;
+  } catch (error) {
+    return error.message;
+  }
 }
 
 /**

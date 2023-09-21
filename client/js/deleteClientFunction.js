@@ -17,13 +17,16 @@ function deleteClient(host, id, row) {
 
   closeModal(modal);
 
-  deleteBtn.addEventListener('click', async () => {
+  async function handleDelete() {
     await serverDeleteClient(host, id);
 
     row.remove();
 
     modal.close();
-  });
+    deleteBtn.removeEventListener('click', handleDelete);
+  }
+
+  deleteBtn.addEventListener('click', handleDelete);
 }
 
 // Экспортируем функции
