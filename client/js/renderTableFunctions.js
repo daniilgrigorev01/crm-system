@@ -54,8 +54,28 @@ function createClientRow(host, obj) {
 
   obj.contacts.forEach((contact) => {
     const icon = getIconContact(contact.type);
+    const elementIcon = new DOMParser().parseFromString(icon, 'text/html').body.firstChild;
+    let contentTooltip = '';
 
-    cellContacts.innerHTML += `${icon}`;
+    cellContacts.append(elementIcon);
+
+    if (contact.type === 'Телефон') {
+      contentTooltip = `<span class='font-bold'>${contact.value}</span>`;
+
+      /* eslint-disable no-undef */
+      tippy(elementIcon, {
+        content: contentTooltip,
+        allowHTML: true,
+      });
+    } else {
+      contentTooltip = `${contact.type}: <span class='text-[#b89eff] font-bold'>${contact.value}</span>`;
+
+      tippy(elementIcon, {
+        content: contentTooltip,
+        allowHTML: true,
+      });
+      /* eslint-enable no-undef */
+    }
   });
 
   cellBtns.classList.add('pl-5', 'lg:columns-2');
