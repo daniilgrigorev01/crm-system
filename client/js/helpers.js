@@ -70,20 +70,16 @@ function getIconContact(type) {
   }
 }
 
-function changeTypeInput(modal) {
-  const selects = modal.querySelectorAll('.form-select');
-
-  selects.forEach((select) => {
+function changeTypeInput(select) {
+  function handlerSelect() {
     const targetInput = select.nextElementSibling;
     const dropdown = select.querySelector('.dropdown');
     const selectIcon = select.querySelector('.select-icon');
     const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
     const selectValue = select.querySelector('.select-text');
 
-    select.addEventListener('click', () => {
-      dropdown.classList.toggle('scale-y-0');
-      selectIcon.classList.toggle('rotate-180');
-    });
+    dropdown.classList.toggle('scale-y-0');
+    selectIcon.classList.toggle('rotate-180');
 
     dropdownItems.forEach((item) => {
       item.addEventListener('click', () => {
@@ -96,7 +92,9 @@ function changeTypeInput(modal) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Телефон');
             selectValue.textContent = 'Телефон';
-            Inputmask('+7 (999) 999-99-99').mask(targetInput);
+            if (!targetInput.inputmask) {
+              Inputmask('+7 (999) 999-99-99').mask(targetInput);
+            }
 
             break;
           case 'Email':
@@ -105,7 +103,9 @@ function changeTypeInput(modal) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Email');
             selectValue.textContent = 'Email';
-            targetInput.inputmask.remove();
+            if (targetInput.inputmask) {
+              targetInput.inputmask.remove();
+            }
 
             break;
           case 'Facebook':
@@ -114,7 +114,9 @@ function changeTypeInput(modal) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Facebook');
             selectValue.textContent = 'Facebook';
-            targetInput.inputmask.remove();
+            if (targetInput.inputmask) {
+              targetInput.inputmask.remove();
+            }
 
             break;
           case 'VK':
@@ -123,7 +125,9 @@ function changeTypeInput(modal) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'VK');
             selectValue.textContent = 'VK';
-            targetInput.inputmask.remove();
+            if (targetInput.inputmask) {
+              targetInput.inputmask.remove();
+            }
 
             break;
           default:
@@ -132,7 +136,9 @@ function changeTypeInput(modal) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Другое');
             selectValue.textContent = 'Другое';
-            targetInput.inputmask.remove();
+            if (targetInput.inputmask) {
+              targetInput.inputmask.remove();
+            }
 
             break;
         }
@@ -140,7 +146,9 @@ function changeTypeInput(modal) {
 
       return item;
     });
-  });
+  }
+
+  select.addEventListener('click', handlerSelect);
 }
 
 function createContactInputBlock(selectText = 'Телефон', inputValue = '') {
@@ -217,6 +225,7 @@ function createContactInputBlock(selectText = 'Телефон', inputValue = '')
   dropdownItemVk.textContent = 'VK';
   dropdownItemOther.classList.add('mb-2.5', 'last:mb-0', 'dropdown-item');
   dropdownItemOther.textContent = 'Другое';
+
   dropdown.append(dropdownItemPhone, dropdownItemEmail, dropdownItemFb, dropdownItemVk, dropdownItemOther);
 
   input.classList.add(
@@ -232,14 +241,35 @@ function createContactInputBlock(selectText = 'Телефон', inputValue = '')
     'text-sm',
     'placeholder:text-txt_grey'
   );
-  input.type = 'tel';
-  input.name = 'phone';
+
+  switch (selectText) {
+    case 'Телефон':
+      input.type = 'tel';
+      input.name = 'phone';
+      Inputmask('+7 (999) 999-99-99').mask(input);
+      break;
+    case 'Email':
+      input.type = 'email';
+      input.name = 'email';
+      break;
+    case 'Facebook':
+      input.type = 'url';
+      input.name = 'facebook';
+      break;
+    case 'VK':
+      input.type = 'url';
+      input.name = 'vk';
+      break;
+    case 'Другое':
+      input.type = 'text';
+      input.name = 'other';
+      break;
+  }
+
   input.value = inputValue;
   input.setAttribute('aria-label', selectText);
   input.dataset.completed = 'false';
   input.placeholder = 'Введите данные контакта';
-
-  Inputmask('+7 (999) 999-99-99').mask(input);
 
   cancelBtn.classList.add(
     'absolute',
@@ -279,18 +309,19 @@ function createContactInputBlock(selectText = 'Телефон', inputValue = '')
 function handlerAddContact(event) {
   event.preventDefault();
 
-  const modal = document.getElementById('modalAddNewClient');
+  const modal = event.target.closest('.dialog');
   const blockContacts = modal.querySelector('.modal-block-contacts__wrapper');
   const btnAddContact = modal.querySelector('.modal-btn-add-contact');
+  const selectContact = createContactInputBlock();
 
   let countInput = blockContacts.querySelectorAll('.form-select').length;
 
   if (countInput < 10) {
     countInput++;
 
-    blockContacts.append(createContactInputBlock());
+    blockContacts.append(selectContact);
 
-    changeTypeInput(modal);
+    changeTypeInput(selectContact.querySelector('.form-select'));
 
     if (countInput === 10) {
       btnAddContact.classList.add('visually-hidden');
@@ -307,28 +338,51 @@ function setContactInput(modal) {
 function closeModal(modal) {
   const cancelBtn = modal.querySelector('.cancel-btn');
   const closeBtn = modal.querySelector('.close-btn');
-  const form = document.getElementById('formAddNewClient');
+  const form = modal.querySelector('.form');
   const btnAddContact = modal.querySelector('.modal-btn-add-contact');
 
-  cancelBtn.addEventListener('click', () => {
-    modal.close();
-    form.reset();
-    btnAddContact.removeEventListener('click', handlerAddContact);
-  });
+  console.log();
 
-  closeBtn.addEventListener('click', () => {
-    modal.close();
-    form.reset();
-    btnAddContact.removeEventListener('click', handlerAddContact);
-  });
-
-  modal.addEventListener('click', ({ currentTarget, target }) => {
-    if (currentTarget === target) {
-      modal.close();
+  function handlerCancelModal() {
+    if (form) {
       form.reset();
       btnAddContact.removeEventListener('click', handlerAddContact);
     }
-  });
+    modal.close();
+    cancelBtn.removeEventListener('click', handlerCancelModal);
+    closeBtn.removeEventListener('click', handlerCloseModal);
+    modal.removeEventListener('click', handlerCloseBackdrop);
+  }
+
+  function handlerCloseModal() {
+    if (form) {
+      form.reset();
+      btnAddContact.removeEventListener('click', handlerAddContact);
+    }
+    modal.close();
+    closeBtn.removeEventListener('click', handlerCloseModal);
+    cancelBtn.removeEventListener('click', handlerCancelModal);
+    modal.removeEventListener('click', handlerCloseBackdrop);
+  }
+
+  cancelBtn.addEventListener('click', handlerCancelModal);
+
+  closeBtn.addEventListener('click', handlerCloseModal);
+
+  function handlerCloseBackdrop(event) {
+    if (event.target === event.currentTarget) {
+      if (form) {
+        form.reset();
+        btnAddContact.removeEventListener('click', handlerAddContact);
+      }
+      modal.close();
+      modal.removeEventListener('click', handlerCloseBackdrop);
+      closeBtn.removeEventListener('click', handlerCloseModal);
+      cancelBtn.removeEventListener('click', handlerCancelModal);
+    }
+  }
+
+  modal.addEventListener('click', handlerCloseBackdrop);
 }
 
 // Экспортируем функции

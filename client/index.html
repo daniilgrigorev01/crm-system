@@ -129,7 +129,7 @@
         </table>
       </div>
 
-      <dialog class="w-[300px] backdrop:bg-[rgba(51,51,51,0.6)] md:w-[450px]" id="modalAddNewClient">
+      <dialog class="dialog w-[300px] backdrop:bg-[rgba(51,51,51,0.6)] md:w-[450px]" id="modalAddNewClient">
         <div class="relative flex flex-col items-center px-[12px] py-5 md:px-7">
           <button class="close-btn absolute right-3 top-3 md:right-5 md:top-5">
             <svg
@@ -147,7 +147,7 @@
             </svg>
           </button>
           <h2 class="mb-8 self-start text-lg font-bold">Новый клиент</h2>
-          <form method="dialog" id="formAddNewClient" class="flex w-full flex-col">
+          <form method="dialog" id="formAddNewClient" class="form flex w-full flex-col" novalidate>
             <div class="relative mb-8 flex">
               <label for="surnameNewClient" class="absolute top-[6px] text-txt_grey"
                 >Фамилия<span class="text-firm">*</span></label
@@ -207,6 +207,90 @@
               Сохранить
             </button>
             <button class="cancel-btn text-xs underline" type="reset">Отмена</button>
+          </form>
+        </div>
+      </dialog>
+      <dialog class="dialog w-[300px] backdrop:bg-[rgba(51,51,51,0.6)] md:w-[450px]" id="modalChangeClient">
+        <div class="relative flex flex-col items-center px-[12px] py-5 md:px-7">
+          <button class="close-btn absolute right-3 top-3 md:right-5 md:top-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              width="16.466"
+              height="16.466"
+              viewBox="311.767 311.767 16.466 16.466"
+            >
+              <path
+                fill="#b0b0b0"
+                fill-rule="evenodd"
+                d="m327.733 313.233-.966-.966-6.767 6.766-6.767-6.766-.966.966 6.766 6.767-6.766 6.767.966.966 6.767-6.766 6.767 6.766.966-.966-6.766-6.767 6.766-6.767Z"
+              />
+            </svg>
+          </button>
+          <div class="mb-8 flex items-center self-start">
+            <h2 class="mr-2.5 text-lg font-bold">Изменить клиента</h2>
+            <span class="id-client translate-y-[2px] text-xs text-txt_grey">ID: 124214</span>
+          </div>
+          <form method="dialog" id="formChangeClient" class="form flex w-full flex-col" novalidate>
+            <div class="relative mb-8 flex">
+              <label for="surnameChangeClient" class="absolute top-[6px] text-txt_grey"
+                >Фамилия<span class="text-firm">*</span></label
+              >
+              <input
+                type="text"
+                name="surnameChangeClient"
+                id="surnameChangeClient"
+                class="w-full border-x-0 border-b border-t-0 border-grey px-0 py-1"
+              />
+            </div>
+            <div class="relative mb-8 flex">
+              <label for="nameChangeClient" class="absolute top-[6px] text-txt_grey"
+                >Имя<span class="text-firm">*</span></label
+              >
+              <input
+                type="text"
+                name="nameChangeClient"
+                id="nameChangeClient"
+                class="w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+              />
+            </div>
+            <div class="relative mb-6 flex">
+              <label for="patronymicChangeClient" class="absolute top-[6px] text-txt_grey">Отчество</label>
+              <input
+                type="text"
+                name="patronymicChangeClient"
+                id="patronymicChangeClient"
+                class="w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+              />
+            </div>
+            <div class="-mx-[12px] mb-2 bg-[rgba(200,197,209,0.2)] px-3.5 py-2 md:-mx-7 md:px-7">
+              <div class="modal-block-contacts relative flex flex-col">
+                <div class="modal-block-contacts__wrapper"></div>
+                <button type="button" class="modal-btn-add-contact flex items-center justify-center font-semibold">
+                  <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                    <g clip-path="url(#t)">
+                      <path
+                        fill="#9873FF"
+                        d="M8 4.667c-.367 0-.667.3-.667.666v2h-2c-.366 0-.666.3-.666.667 0 .367.3.667.666.667h2v2c0 .366.3.666.667.666.367 0 .667-.3.667-.666v-2h2c.366 0 .666-.3.666-.667 0-.367-.3-.667-.666-.667h-2v-2c0-.366-.3-.666-.667-.666Zm0-3.334A6.67 6.67 0 0 0 1.333 8 6.67 6.67 0 0 0 8 14.667 6.67 6.67 0 0 0 14.667 8 6.67 6.67 0 0 0 8 1.333Zm0 12A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333Z"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="t">
+                        <path fill="#fff" d="M0 0h16v16H0z" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  Добавить контакт
+                </button>
+              </div>
+            </div>
+
+            <p class="error-text text-center text-[10px] text-red-600"></p>
+
+            <button type="submit" class="action-btn mb-2.5 mt-2 self-center bg-firm px-9 py-3 font-semibold text-white">
+              Сохранить
+            </button>
+            <button class="cancel-btn text-xs underline" type="reset">Удалить клиента</button>
           </form>
         </div>
       </dialog>
