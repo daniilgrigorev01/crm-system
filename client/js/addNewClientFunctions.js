@@ -48,10 +48,18 @@ function createObjectNewClient(form) {
 async function addNewClient(host, form, arr) {
   const modal = document.getElementById('modalAddNewClient');
   const btnAddContact = modal.querySelector('.modal-btn-add-contact');
+  const btnSubmit = modal.querySelector('.action-btn');
   const errorText = modal.querySelector('.error-text');
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
+
+    btnSubmit.querySelector('.animate-spin').classList.remove('hidden');
+
+    // Имитация задержки для демонстрации спиннера в кнопке.
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    btnSubmit.querySelector('.animate-spin').classList.add('hidden');
 
     const result = await serverAddNewClient(host, createObjectNewClient(form));
 

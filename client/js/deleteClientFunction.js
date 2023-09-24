@@ -18,7 +18,14 @@ function deleteClient(host, id, row) {
   closeModal(modal);
 
   async function handleDelete() {
+    deleteBtn.querySelector('.animate-spin').classList.remove('hidden');
+
+    // Имитация задержки для демонстрации спиннера в кнопке.
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     await serverDeleteClient(host, id);
+
+    deleteBtn.querySelector('.animate-spin').classList.add('hidden');
 
     row.remove();
 

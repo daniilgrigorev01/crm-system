@@ -4,14 +4,17 @@ import { renderTableClient } from './renderTableFunctions.js';
 
 async function openModalChangeClient(host, id) {
   const modal = document.getElementById('modalChangeClient');
+  const client = await serverGetClient(host, id);
 
-  modal.showModal();
+  if (client) {
+    modal.showModal();
 
-  setContactInput(modal);
+    setContactInput(modal);
 
-  closeModal(modal);
+    closeModal(modal);
 
-  return await serverGetClient(host, id);
+    return client;
+  }
 }
 
 async function getChangeClient(host, id) {
@@ -38,7 +41,7 @@ async function getChangeClient(host, id) {
     for (const contact of contactsList) {
       const contactType = contact.type;
       const contactValue = contact.value;
-      const contactInput = createContactInputBlock(contactType, contactValue);
+      const contactInput = createContactInputBlock(modal, contactType, contactValue);
       const selectContact = contactInput.querySelector('.form-select');
 
       changeTypeInput(selectContact);
