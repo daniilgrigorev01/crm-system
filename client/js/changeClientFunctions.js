@@ -1,9 +1,19 @@
-import { serverChangeClient, serverDeleteClient, serverGetClienstList, serverGetClient } from './serverFunctions.js';
+// Импортируем функции
+import { serverChangeClient, serverDeleteClient, serverGetClient, serverGetClientsList } from './serverFunctions.js';
 import { changeTypeInput, closeModal, createContactInputBlock, setContactInput } from './helpers.js';
 import { renderTableClient } from './renderTableFunctions.js';
 
+/**
+ * Открывает модальное окно изменения клиента.
+ *
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {string} id ID клиента, данные которого необходимо изменить.
+ * @return {Promise<object>} Объект клиента, данные которого необходимо изменить.
+ */
 async function openModalChangeClient(host, id) {
   const modal = document.getElementById('modalChangeClient');
+
+  // Получаем данные клиента
   const client = await serverGetClient(host, id);
 
   if (client) {
@@ -17,17 +27,25 @@ async function openModalChangeClient(host, id) {
   }
 }
 
+/**
+ * Заполняет форму изменения клиента начальными данными.
+ *
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {string} id ID клиента, данные которого необходимо изменить.
+ */
 async function getChangeClient(host, id) {
   const modal = document.getElementById('modalChangeClient');
   const blockContacts = modal.querySelector('.modal-block-contacts__wrapper');
 
   const idClient = modal.querySelector('.id-client');
-  const inputName = document.getElementById('nameChangeClient');
-  const inputSurname = document.getElementById('surnameChangeClient');
-  const inputPatronymic = document.getElementById('patronymicChangeClient');
+  const inputName = modal.querySelector('#nameChangeClient');
+  const inputSurname = modal.querySelector('#surnameChangeClient');
+  const inputPatronymic = modal.querySelector('#patronymicChangeClient');
 
+  // Получаем объект клиента
   const client = await openModalChangeClient(host, id);
 
+  // Заполняем форму данными
   idClient.innerText = 'ID:  ' + client.id.slice(-6);
   inputName.value = client.name;
   inputSurname.value = client.surname;
@@ -51,42 +69,53 @@ async function getChangeClient(host, id) {
   }
 }
 
+/**
+ * Изменяет данные клиента.
+ *
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {object} obj Объект с изначальными данными клиента.
+ */
 function setChangeClient(host, obj) {
-  const form = document.getElementById('formChangeClient');
-  const inputName = document.getElementById('nameChangeClient');
-  const inputSurname = document.getElementById('surnameChangeClient');
-  const inputPatronymic = document.getElementById('patronymicChangeClient');
   const modal = document.getElementById('modalChangeClient');
+  const form = modal.querySelector('#formChangeClient');
+  const inputName = form.querySelector('#nameChangeClient');
+  const inputSurname = form.querySelector('#surnameChangeClient');
+  const inputPatronymic = form.querySelector('#patronymicChangeClient');
   const deleteBtn = form.querySelector('.cancel-btn');
   const errorText = modal.querySelector('.error-text');
 
+  /**
+   * Изменяет данные клиента при отправке формы.
+   *
+   * @param {Event} event - Событие отправки формы.
+   */
   async function handlerSubmitChange(event) {
     event.preventDefault();
 
+    // Изменяем данные в объекте
     obj.name = inputName.value.trim();
     obj.surname = inputSurname.value.trim();
     obj.lastName = inputPatronymic.value.trim();
 
-    obj.contacts = [];
-
     const contactsInput = form.querySelectorAll('.modal-contacts-input');
 
     if (contactsInput.length !== 0) {
-      contactsInput.forEach((input) => {
+      obj.contacts = Array.from(contactsInput).map((input) => {
         const contactType = input.getAttribute('aria-label');
-        const contactValue = input.value.trim();
+        const contactValue = input.value;
 
-        obj.contacts.push({
+        return {
           type: contactType,
           value: contactValue,
-        });
+        };
       });
+    } else {
+      obj.contacts = [];
     }
 
     const result = await serverChangeClient(host, obj);
 
-    console.log(result);
-
+    // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
     switch (result) {
       case 'Не указано имя':
         errorText.textContent = 'Не указано имя';
@@ -98,17 +127,18 @@ function setChangeClient(host, obj) {
         errorText.textContent = 'Не все добавленные контакты полностью заполнены';
         break;
       default:
-        await serverChangeClient(host, obj);
-
         modal.close();
         form.reset();
 
         form.removeEventListener('submit', handlerSubmitChange);
 
-        renderTableClient(host, await serverGetClienstList(host));
+        renderTableClient(host, await serverGetClientsList(host));
     }
   }
 
+  /**
+   * Удаляет клиента при клике на кнопку.
+   */
   async function handleDelete() {
     await serverDeleteClient(host, obj.id);
 
@@ -118,12 +148,13 @@ function setChangeClient(host, obj) {
     modal.close();
     form.reset();
 
-    renderTableClient(host, await serverGetClienstList(host));
+    renderTableClient(host, await serverGetClientsList(host));
   }
 
+  // Добавляем обработчики событий к форме и кнопке удаления
   deleteBtn.addEventListener('click', handleDelete);
-
   form.addEventListener('submit', handlerSubmitChange);
 }
 
+// Экспортируем функции
 export { getChangeClient, setChangeClient };

@@ -146,58 +146,89 @@
             <div class="relative mb-8 flex">
               <input
                 type="text"
-                placeholder=' '
+                placeholder=" "
                 name="surnameNewClient"
                 id="surnameNewClient"
-                class="peer focus:border-grey focus:ring-transparent w-full border-x-0 border-b border-t-0 border-grey px-0 py-1"
+                class="peer w-full border-x-0 border-b border-t-0 border-grey px-0 py-1 focus:border-grey focus:ring-transparent"
               />
-              <label for="surnameNewClient" class="absolute text-txt_grey top-[6px] text-[10px] translate-y-[-15px] transition-all duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:translate-y-0 peer-focus:text-[10px] peer-focus:translate-y-[-15px]"
-              >Фамилия<span class="text-firm">*</span></label
+              <label
+                for="surnameNewClient"
+                class="absolute top-[6px] translate-y-[-15px] text-[10px] text-txt_grey transition-all duration-200 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:translate-y-[-15px] peer-focus:text-[10px]"
+                >Фамилия<span class="text-firm">*</span></label
               >
             </div>
             <div class="relative mb-8 flex">
               <input
                 type="text"
-                placeholder=' '
+                placeholder=" "
                 name="nameNewClient"
                 id="nameNewClient"
-                class="peer focus:border-grey focus:ring-transparent w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+                class="peer w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0 focus:border-grey focus:ring-transparent"
               />
-              <label for="nameNewClient" class="absolute text-txt_grey top-[6px] text-[10px] translate-y-[-15px] transition-all duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:translate-y-0 peer-focus:text-[10px] peer-focus:translate-y-[-15px]"
-              >Имя<span class="text-firm">*</span></label
+              <label
+                for="nameNewClient"
+                class="absolute top-[6px] translate-y-[-15px] text-[10px] text-txt_grey transition-all duration-200 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:translate-y-[-15px] peer-focus:text-[10px]"
+                >Имя<span class="text-firm">*</span></label
               >
             </div>
             <div class="relative mb-6 flex">
               <input
                 type="text"
-                placeholder=' '
+                placeholder=" "
                 name="patronymicNewClient"
                 id="patronymicNewClient"
-                class="peer focus:border-grey focus:ring-transparent w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+                class="peer w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0 focus:border-grey focus:ring-transparent"
               />
-              <label for="patronymicNewClient" class="absolute text-txt_grey top-[6px] text-[10px] translate-y-[-15px] transition-all duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:translate-y-0 peer-focus:text-[10px] peer-focus:translate-y-[-15px]">Отчество</label>
+              <label
+                for="patronymicNewClient"
+                class="absolute top-[6px] translate-y-[-15px] text-[10px] text-txt_grey transition-all duration-200 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:translate-y-[-15px] peer-focus:text-[10px]"
+                >Отчество</label
+              >
             </div>
             <div class="-mx-[12px] mb-2 bg-[rgba(200,197,209,0.2)] px-3.5 py-2 md:-mx-7 md:px-7">
               <div class="modal-block-contacts relative flex flex-col">
                 <div class="modal-block-contacts__wrapper"></div>
-                <button type="button" class="relative group hover:text-firm modal-btn-add-contact flex items-center justify-center font-semibold">
-                  <svg class='invisible group-hover:visible absolute left-[120px]' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                <button
+                  type="button"
+                  class="modal-btn-add-contact group relative flex items-center justify-center font-semibold hover:text-firm"
+                >
+                  <svg
+                    class="invisible absolute left-[120px] group-hover:visible"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="none"
+                  >
                     <g clip-path="url(#i)">
-                      <path fill="#9873FF" fill-rule="evenodd" d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.669 6.669 0 0 1 14.667 8 6.669 6.669 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm6-2.666c0-.367.3-.667.667-.667.367 0 .667.3.667.667v2h2c.366 0 .666.3.666.666 0 .367-.3.667-.666.667h-2v2c0 .367-.3.667-.667.667a.669.669 0 0 1-.667-.667v-2h-2A.669.669 0 0 1 4.667 8c0-.366.3-.666.666-.666h2v-2Z" clip-rule="evenodd"/>
+                      <path
+                        fill="#9873FF"
+                        fill-rule="evenodd"
+                        d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.669 6.669 0 0 1 14.667 8 6.669 6.669 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm6-2.666c0-.367.3-.667.667-.667.367 0 .667.3.667.667v2h2c.366 0 .666.3.666.666 0 .367-.3.667-.666.667h-2v2c0 .367-.3.667-.667.667a.669.669 0 0 1-.667-.667v-2h-2A.669.669 0 0 1 4.667 8c0-.366.3-.666.666-.666h2v-2Z"
+                        clip-rule="evenodd"
+                      />
                     </g>
                     <defs>
                       <clipPath id="i">
-                        <path fill="#fff" d="M0 0h16v16H0z"/>
+                        <path fill="#fff" d="M0 0h16v16H0z" />
                       </clipPath>
                     </defs>
                   </svg>
-                  <svg class='mr-1 group-hover:invisible' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                  <svg
+                    class="mr-1 group-hover:invisible"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="none"
+                  >
                     <g clip-path="url(#y)">
-                      <path fill="#9873FF" d="M8 4.667c-.367 0-.667.3-.667.667v2h-2c-.366 0-.666.3-.666.666 0 .367.3.667.666.667h2v2c0 .367.3.667.667.667.367 0 .667-.3.667-.667v-2h2c.366 0 .666-.3.666-.667 0-.367-.3-.667-.666-.667h-2v-2c0-.366-.3-.666-.667-.666Zm0-3.333A6.67 6.67 0 0 0 1.333 8 6.67 6.67 0 0 0 8 14.667 6.669 6.669 0 0 0 14.667 8 6.669 6.669 0 0 0 8 1.333Zm0 12A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.334Z"/>
+                      <path
+                        fill="#9873FF"
+                        d="M8 4.667c-.367 0-.667.3-.667.667v2h-2c-.366 0-.666.3-.666.666 0 .367.3.667.666.667h2v2c0 .367.3.667.667.667.367 0 .667-.3.667-.667v-2h2c.366 0 .666-.3.666-.667 0-.367-.3-.667-.666-.667h-2v-2c0-.366-.3-.666-.667-.666Zm0-3.333A6.67 6.67 0 0 0 1.333 8 6.67 6.67 0 0 0 8 14.667 6.669 6.669 0 0 0 14.667 8 6.669 6.669 0 0 0 8 1.333Zm0 12A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.334Z"
+                      />
                     </g>
                     <defs>
                       <clipPath id="y">
-                        <path fill="#fff" d="M0 0h16v16H0z"/>
+                        <path fill="#fff" d="M0 0h16v16H0z" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -208,8 +239,17 @@
 
             <p class="error-text text-center text-[10px] text-red-600"></p>
 
-            <button type="submit" class="hover:bg-[#b89eff] active:bg-[#8052ff] flex items-center action-btn mb-2.5 mt-2 self-center bg-firm px-9 py-3 font-semibold text-white">
-              <svg class='animate-spin mr-0.5 hidden' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            <button
+              type="submit"
+              class="action-btn mb-2.5 mt-2 flex items-center self-center bg-firm px-9 py-3 font-semibold text-white hover:bg-[#b89eff] active:bg-[#8052ff]"
+            >
+              <svg
+                class="mr-0.5 hidden animate-spin"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="none"
+              >
                 <g clip-path="url(#x)">
                   <path
                     stroke="#B89EFF"
@@ -253,59 +293,90 @@
           <form method="dialog" id="formChangeClient" class="form flex w-full flex-col" novalidate>
             <div class="relative mb-8 flex">
               <input
-              type="text"
-              placeholder=' '
-              name="surnameChangeClient"
-              id="surnameChangeClient"
-              class="peer focus:border-grey focus:ring-transparent w-full border-x-0 border-b border-t-0 border-grey px-0 py-1"
+                type="text"
+                placeholder=" "
+                name="surnameChangeClient"
+                id="surnameChangeClient"
+                class="peer w-full border-x-0 border-b border-t-0 border-grey px-0 py-1 focus:border-grey focus:ring-transparent"
               />
-              <label for="surnameChangeClient" class="absolute text-txt_grey top-[6px] text-[10px] translate-y-[-15px] transition-all duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:translate-y-0 peer-focus:text-[10px] peer-focus:translate-y-[-15px]"
+              <label
+                for="surnameChangeClient"
+                class="absolute top-[6px] translate-y-[-15px] text-[10px] text-txt_grey transition-all duration-200 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:translate-y-[-15px] peer-focus:text-[10px]"
                 >Фамилия<span class="text-firm">*</span></label
               >
             </div>
             <div class="relative mb-8 flex">
               <input
                 type="text"
-                placeholder=' '
+                placeholder=" "
                 name="nameChangeClient"
                 id="nameChangeClient"
-                class="peer focus:border-grey focus:ring-transparent w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+                class="peer w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0 focus:border-grey focus:ring-transparent"
               />
-              <label for="nameChangeClient" class="absolute text-txt_grey top-[6px] text-[10px] translate-y-[-15px] transition-all duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:translate-y-0 peer-focus:text-[10px] peer-focus:translate-y-[-15px]"
-              >Имя<span class="text-firm">*</span></label
+              <label
+                for="nameChangeClient"
+                class="absolute top-[6px] translate-y-[-15px] text-[10px] text-txt_grey transition-all duration-200 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:translate-y-[-15px] peer-focus:text-[10px]"
+                >Имя<span class="text-firm">*</span></label
               >
             </div>
             <div class="relative mb-6 flex">
               <input
                 type="text"
-                placeholder=' '
+                placeholder=" "
                 name="patronymicChangeClient"
                 id="patronymicChangeClient"
-                class="peer focus:border-grey focus:ring-transparent w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0"
+                class="peer w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0 focus:border-grey focus:ring-transparent"
               />
-              <label for="patronymicChangeClient" class="absolute text-txt_grey top-[6px] text-[10px] translate-y-[-15px] transition-all duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:translate-y-0 peer-focus:text-[10px] peer-focus:translate-y-[-15px]">Отчество</label>
+              <label
+                for="patronymicChangeClient"
+                class="absolute top-[6px] translate-y-[-15px] text-[10px] text-txt_grey transition-all duration-200 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:text-sm peer-focus:translate-y-[-15px] peer-focus:text-[10px]"
+                >Отчество</label
+              >
             </div>
             <div class="-mx-[12px] mb-2 bg-[rgba(200,197,209,0.2)] px-3.5 py-2 md:-mx-7 md:px-7">
               <div class="modal-block-contacts relative flex flex-col">
                 <div class="modal-block-contacts__wrapper"></div>
-                <button type="button" class="relative group hover:text-firm modal-btn-add-contact flex items-center justify-center font-semibold">
-                  <svg class='invisible group-hover:visible absolute left-[120px]' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                <button
+                  type="button"
+                  class="modal-btn-add-contact group relative flex items-center justify-center font-semibold hover:text-firm"
+                >
+                  <svg
+                    class="invisible absolute left-[120px] group-hover:visible"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="none"
+                  >
                     <g clip-path="url(#t)">
-                      <path fill="#9873FF" fill-rule="evenodd" d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.669 6.669 0 0 1 14.667 8 6.669 6.669 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm6-2.666c0-.367.3-.667.667-.667.367 0 .667.3.667.667v2h2c.366 0 .666.3.666.666 0 .367-.3.667-.666.667h-2v2c0 .367-.3.667-.667.667a.669.669 0 0 1-.667-.667v-2h-2A.669.669 0 0 1 4.667 8c0-.366.3-.666.666-.666h2v-2Z" clip-rule="evenodd"/>
+                      <path
+                        fill="#9873FF"
+                        fill-rule="evenodd"
+                        d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.669 6.669 0 0 1 14.667 8 6.669 6.669 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm6-2.666c0-.367.3-.667.667-.667.367 0 .667.3.667.667v2h2c.366 0 .666.3.666.666 0 .367-.3.667-.666.667h-2v2c0 .367-.3.667-.667.667a.669.669 0 0 1-.667-.667v-2h-2A.669.669 0 0 1 4.667 8c0-.366.3-.666.666-.666h2v-2Z"
+                        clip-rule="evenodd"
+                      />
                     </g>
                     <defs>
                       <clipPath id="t">
-                        <path fill="#fff" d="M0 0h16v16H0z"/>
+                        <path fill="#fff" d="M0 0h16v16H0z" />
                       </clipPath>
                     </defs>
                   </svg>
-                  <svg class='mr-1 group-hover:invisible' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                  <svg
+                    class="mr-1 group-hover:invisible"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="none"
+                  >
                     <g clip-path="url(#p)">
-                      <path fill="#9873FF" d="M8 4.667c-.367 0-.667.3-.667.667v2h-2c-.366 0-.666.3-.666.666 0 .367.3.667.666.667h2v2c0 .367.3.667.667.667.367 0 .667-.3.667-.667v-2h2c.366 0 .666-.3.666-.667 0-.367-.3-.667-.666-.667h-2v-2c0-.366-.3-.666-.667-.666Zm0-3.333A6.67 6.67 0 0 0 1.333 8 6.67 6.67 0 0 0 8 14.667 6.669 6.669 0 0 0 14.667 8 6.669 6.669 0 0 0 8 1.333Zm0 12A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.334Z"/>
+                      <path
+                        fill="#9873FF"
+                        d="M8 4.667c-.367 0-.667.3-.667.667v2h-2c-.366 0-.666.3-.666.666 0 .367.3.667.666.667h2v2c0 .367.3.667.667.667.367 0 .667-.3.667-.667v-2h2c.366 0 .666-.3.666-.667 0-.367-.3-.667-.666-.667h-2v-2c0-.366-.3-.666-.667-.666Zm0-3.333A6.67 6.67 0 0 0 1.333 8 6.67 6.67 0 0 0 8 14.667 6.669 6.669 0 0 0 14.667 8 6.669 6.669 0 0 0 8 1.333Zm0 12A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.334Z"
+                      />
                     </g>
                     <defs>
                       <clipPath id="p">
-                        <path fill="#fff" d="M0 0h16v16H0z"/>
+                        <path fill="#fff" d="M0 0h16v16H0z" />
                       </clipPath>
                     </defs>
                   </svg>
@@ -316,7 +387,10 @@
 
             <p class="error-text text-center text-[10px] text-red-600"></p>
 
-            <button type="submit" class="hover:bg-[#b89eff] active:bg-[#8052ff] action-btn mb-2.5 mt-2 self-center bg-firm px-9 py-3 font-semibold text-white">
+            <button
+              type="submit"
+              class="action-btn mb-2.5 mt-2 self-center bg-firm px-9 py-3 font-semibold text-white hover:bg-[#b89eff] active:bg-[#8052ff]"
+            >
               Сохранить
             </button>
             <button class="cancel-btn text-xs underline" type="reset">Удалить клиента</button>
@@ -343,9 +417,15 @@
           <h2 class="mb-2.5 text-lg font-bold">Удалить клиента</h2>
           <p class="mb-6 text-center">Вы действительно хотите удалить данного клиента?</p>
           <button
-            class="flex items-center action-btn mb-2.5 bg-firm px-9 py-3 font-semibold text-white hover:bg-[#b89eff] active:bg-[#8052ff]"
+            class="action-btn mb-2.5 flex items-center bg-firm px-9 py-3 font-semibold text-white hover:bg-[#b89eff] active:bg-[#8052ff]"
           >
-            <svg class='animate-spin mr-0.5 hidden' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            <svg
+              class="mr-0.5 hidden animate-spin"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+            >
               <g clip-path="url(#x)">
                 <path
                   stroke="#B89EFF"

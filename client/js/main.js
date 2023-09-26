@@ -1,13 +1,16 @@
 // Импортируем функции
-import { serverGetClienstList } from './serverFunctions.js';
+import { serverGetClientsList } from './serverFunctions.js';
 import { renderTableClient } from './renderTableFunctions.js';
 import { addNewClient, openModalAddClient } from './addNewClientFunctions.js';
 
+/**
+ * Запускает рендер таблицы и необходимые для работы функции.
+ */
 async function initialApp() {
   const SERVER__ADDRESS = 'http://localhost:3000';
   const formAddClient = document.getElementById('formAddNewClient');
 
-  const clientList = await serverGetClienstList(SERVER__ADDRESS);
+  const clientList = await serverGetClientsList(SERVER__ADDRESS);
 
   if (clientList.length !== 0) {
     renderTableClient(SERVER__ADDRESS, clientList);

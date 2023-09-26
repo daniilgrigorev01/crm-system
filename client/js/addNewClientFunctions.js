@@ -1,37 +1,40 @@
-import { serverAddNewClient, serverGetClienstList } from './serverFunctions.js';
+// Импортируем функции
+import { serverAddNewClient, serverGetClientsList } from './serverFunctions.js';
 import { renderTableClient } from './renderTableFunctions.js';
 import { closeModal, handlerAddContact, setContactInput } from './helpers.js';
 
 /**
  * Создаёт объект на основе данных, полученных из формы добавления клиента.
  *
- * @param {HTMLFormElement} form - Форма добавления клиента.
- * @returns {Object} - Объект с данными клиента.
+ * @param {HTMLFormElement} form Форма добавления клиента.
+ * @returns {object} Объект с данными клиента.
  */
 function createObjectNewClient(form) {
-  const surnameClient = document.getElementById('surnameNewClient');
-  const nameClient = document.getElementById('nameNewClient');
-  const patronymicClient = document.getElementById('patronymicNewClient');
+  const surnameClient = form.querySelector('#surnameNewClient');
+  const nameClient = form.querySelector('#nameNewClient');
+  const patronymicClient = form.querySelector('#patronymicNewClient');
   const contactsInput = form.querySelector('.modal-block-contacts').querySelectorAll('.modal-contacts-input');
 
+  // Создаём пустой объект
   const client = {};
 
+  // Добавляем данные в объект
   client.name = nameClient.value.trim();
   client.surname = surnameClient.value.trim();
   client.lastName = patronymicClient.value.trim();
 
-  client.contacts = [];
-
   if (contactsInput.length !== 0) {
-    contactsInput.forEach((input) => {
+    client.contacts = Array.from(contactsInput).map((input) => {
       const contactType = input.getAttribute('aria-label');
       const contactValue = input.value;
 
-      client.contacts.push({
+      return {
         type: contactType,
         value: contactValue,
-      });
+      };
     });
+  } else {
+    client.contacts = [];
   }
 
   return client;
@@ -40,10 +43,9 @@ function createObjectNewClient(form) {
 /**
  * Отправляет объект клиента на сервер и добавляет строку с данными в таблицу.
  *
- * @param {string} host - URL сервера, на котором размещено API.
- * @param {HTMLFormElement} form - Форма добавления клиента.
- * @param {Object[]} arr - Массив объектов.
- * @returns {Promise<void>}
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {HTMLFormElement} form Форма добавления клиента.
+ * @param {Array<object>} arr Массив объектов.
  */
 async function addNewClient(host, form, arr) {
   const modal = document.getElementById('modalAddNewClient');
@@ -51,18 +53,15 @@ async function addNewClient(host, form, arr) {
   const btnSubmit = modal.querySelector('.action-btn');
   const errorText = modal.querySelector('.error-text');
 
+  // Добавляем обработчик событий к форме оправки данных нового клиента
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     btnSubmit.querySelector('.animate-spin').classList.remove('hidden');
 
-    // Имитация задержки для демонстрации спиннера в кнопке.
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
-    btnSubmit.querySelector('.animate-spin').classList.add('hidden');
-
     const result = await serverAddNewClient(host, createObjectNewClient(form));
 
+    // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
     switch (result) {
       case 'Не указано имя':
         errorText.textContent = 'Не указано имя';
@@ -74,7 +73,7 @@ async function addNewClient(host, form, arr) {
         errorText.textContent = 'Не все добавленные контакты полностью заполнены';
         break;
       default:
-        arr = await serverGetClienstList(host);
+        arr = await serverGetClientsList(host);
 
         renderTableClient(host, arr);
 
@@ -82,6 +81,8 @@ async function addNewClient(host, form, arr) {
         form.reset();
         btnAddContact.removeEventListener('click', handlerAddContact);
     }
+
+    btnSubmit.querySelector('.animate-spin').classList.add('hidden');
   });
 }
 
@@ -96,10 +97,12 @@ function openModalAddClient() {
   btnAddClient.addEventListener('click', () => {
     closeModal(modal);
 
+    // Очищаем блок с контактами
     blockInput.innerHTML = '';
 
     modal.showModal();
 
+    // Запускаем функцию добавления контакта
     setContactInput(modal);
   });
 }

@@ -6,80 +6,98 @@ import { getChangeClient, setChangeClient } from './changeClientFunctions.js';
 /**
  * Создаёт строку таблицы на основе данных клиента, полученных в объекте.
  *
- * @param {object} obj - Объект с данными клиента.
- * @param {string} host - URL сервера, на котором размещено API.
- * @returns {HTMLTableRowElement} - Строка таблицы с данными клиента.
+ * @param {object} obj Объект с данными клиента.
+ * @param {string} host URL сервера, на котором размещено API.
+ * @returns {HTMLTableRowElement} Строка таблицы с данными клиента.
  */
 function createClientRow(host, obj) {
+  // Создаём строку таблицы
   const row = document.createElement('tr');
-  const cellId = document.createElement('td');
-  const cellName = document.createElement('td');
-  const cellCreationDate = document.createElement('td');
-  const cellLastModifiedDate = document.createElement('td');
-  const cellContacts = document.createElement('td');
-  const cellBtns = document.createElement('td');
-
-  const creationDateWrapper = document.createElement('div');
-  const lastModifiedDate = document.createElement('div');
-
-  const cellCreationTime = document.createElement('span');
-  const cellLastModifiedTime = document.createElement('span');
-
-  const changeBtn = document.createElement('button');
-  const deleteBtn = document.createElement('button');
-
-  const svgId = Date.now();
-
   row.classList.add('bg-white', 'h-15');
 
-  cellId.classList.add('text-txt_grey', 'pl-5', 'text-xs');
-  cellId.innerText = obj.id.slice(-6);
+  /**
+   * Создаёт ячейку таблицы с данными.
+   *
+   * @param {any} content Данные клиента.
+   * @param {Array<string>} classes CSS-классы ячейки.
+   * @returns {HTMLTableCellElement} Ячейка таблицы.
+   */
+  function createTableCell(content, classes = []) {
+    const cell = document.createElement('td');
+    cell.innerHTML = content;
+    cell.classList.add(...classes);
 
-  cellName.classList.add('pl-2.5');
-  cellName.innerText = `${obj.surname} ${obj.name} ${obj.lastName}`;
+    return cell;
+  }
 
+  row.appendChild(createTableCell(obj.id.slice(-6), ['text-txt_grey', 'pl-5', 'text-xs']));
+  row.appendChild(createTableCell(`${obj.surname} ${obj.name} ${obj.lastName}`, ['pl-2.5']));
+
+  // Создаём ячейку с датой и временем создания
+  const cellCreationDate = document.createElement('td');
+  const creationDateWrapper = document.createElement('div');
+  const creationTime = document.createElement('span');
   creationDateWrapper.classList.add('lg:pl-2.5', 'flex', 'flex-wrap');
   creationDateWrapper.innerText = formatDate(obj.createdAt);
-  cellCreationTime.classList.add('text-txt_grey', 'lg:ml-2.5');
-  cellCreationTime.innerText = formatTime(obj.createdAt);
-  creationDateWrapper.append(cellCreationTime);
-  cellCreationDate.append(creationDateWrapper);
+  creationTime.classList.add('text-txt_grey', 'lg:ml-2.5');
+  creationTime.innerText = formatTime(obj.createdAt);
+  creationDateWrapper.appendChild(creationTime);
+  cellCreationDate.appendChild(creationDateWrapper);
+  row.appendChild(cellCreationDate);
 
-  lastModifiedDate.classList.add('lg:pl-2.5', 'flex', 'flex-wrap');
-  lastModifiedDate.innerText = formatDate(obj.updatedAt);
-  cellLastModifiedTime.classList.add('text-txt_grey', 'lg:ml-2.5');
-  cellLastModifiedTime.innerText = formatTime(obj.updatedAt);
-  lastModifiedDate.append(cellLastModifiedTime);
-  cellLastModifiedDate.append(lastModifiedDate);
+  // Создаём ячейку с датой и временем последнего изменения
+  const cellLastModifiedDate = document.createElement('td');
+  const lastModifiedDateWrapper = document.createElement('div');
+  const lastModifiedTime = document.createElement('span');
+  lastModifiedDateWrapper.classList.add('lg:pl-2.5', 'flex', 'flex-wrap');
+  lastModifiedDateWrapper.innerText = formatDate(obj.updatedAt);
+  lastModifiedTime.classList.add('text-txt_grey', 'lg:ml-2.5');
+  lastModifiedTime.innerText = formatTime(obj.updatedAt);
+  lastModifiedDateWrapper.appendChild(lastModifiedTime);
+  cellLastModifiedDate.appendChild(lastModifiedDateWrapper);
+  row.appendChild(cellLastModifiedDate);
 
+  // Создаём ячейку с контактами
+  const cellContacts = document.createElement('td');
   cellContacts.classList.add('grid', 'grid-cols-5', 'gap-y-1.5', 'py-2.5', 'content-center', 'h-15');
 
-  obj.contacts.forEach((contact) => {
+  /**
+   * Создаёт иконки контактов.
+   *
+   * @param contact Контакты клиента.
+   */
+  function createContactsIcon(contact) {
     const icon = getIconContact(contact.type);
     const elementIcon = new DOMParser().parseFromString(icon, 'text/html').body.firstChild;
 
-    cellContacts.append(elementIcon);
+    const contentTooltip =
+      contact.type === 'Телефон'
+        ? `<span class='font-bold'>${contact.value}</span>`
+        : `${contact.type}: <span class='text-[#b89eff] font-bold'>${contact.value}</span>`;
 
-    if (contact.type === 'Телефон') {
-      const contentTooltip = `<span class='font-bold'>${contact.value}</span>`;
+    // Добавляем всплывающие подсказки к иконкам контактов
+    /* eslint-disable-next-line no-undef */
+    tippy(elementIcon, {
+      content: contentTooltip,
+      allowHTML: true,
+    });
 
-      /* eslint-disable no-undef */
-      tippy(elementIcon, {
-        content: contentTooltip,
-        allowHTML: true,
-      });
-    } else {
-      const contentTooltip = `${contact.type}: <span class='text-[#b89eff] font-bold'>${contact.value}</span>`;
+    cellContacts.appendChild(elementIcon);
+  }
 
-      tippy(elementIcon, {
-        content: contentTooltip,
-        allowHTML: true,
-      });
-      /* eslint-enable no-undef */
-    }
-  });
+  // Добавляем иконки контактов в ячейку
+  obj.contacts.forEach(createContactsIcon);
+  row.appendChild(cellContacts);
 
+  // Создаём ID для SVG
+  const svgId = Date.now();
+
+  //  Создаём ячейку с кнопками
+  const cellBtns = document.createElement('td');
   cellBtns.classList.add('pl-5', 'lg:columns-2');
+
+  // Создаём кнопки и добавляем обработчики событий
+  const changeBtn = document.createElement('button');
   changeBtn.classList.add('flex', 'items-center', 'hover:text-firm');
   changeBtn.innerHTML = `
     <svg class='row-btn mr-0.5 opacity-70' xmlns='http://www.w3.org/2000/svg' width='13' height='13' fill='none'>
@@ -99,6 +117,19 @@ function createClientRow(host, obj) {
       </defs>
     </svg>
     Изменить`;
+
+  changeBtn.addEventListener('click', async () => {
+    changeBtn.querySelector('.animate-spin').classList.remove('hidden');
+    changeBtn.querySelector('.row-btn').classList.add('hidden');
+
+    await getChangeClient(host, obj.id);
+    await setChangeClient(host, obj);
+
+    changeBtn.querySelector('.animate-spin').classList.add('hidden');
+    changeBtn.querySelector('.row-btn').classList.remove('hidden');
+  });
+
+  const deleteBtn = document.createElement('button');
   deleteBtn.classList.add('flex', 'items-center', 'hover:text-[#f06a4d]');
   deleteBtn.innerHTML = `
     <svg class='row-btn mr-0.5 opacity-70' xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none'>
@@ -118,36 +149,20 @@ function createClientRow(host, obj) {
       </defs>
     </svg>
     Удалить`;
-  cellBtns.append(changeBtn, deleteBtn);
-
-  row.append(cellId, cellName, cellCreationDate, cellLastModifiedDate, cellContacts, cellBtns);
-
-  changeBtn.addEventListener('click', async () => {
-    changeBtn.querySelector('.animate-spin').classList.remove('hidden');
-    changeBtn.querySelector('.row-btn').classList.add('hidden');
-
-    // Имитация задержки ответа от сервера для демонстрации спиннера в кнопке.
-    await new Promise((resolve) => setTimeout(resolve, 300));
-
-    await getChangeClient(host, obj.id);
-    await setChangeClient(host, obj);
-
-    changeBtn.querySelector('.animate-spin').classList.add('hidden');
-    changeBtn.querySelector('.row-btn').classList.remove('hidden');
-  });
 
   deleteBtn.addEventListener('click', async () => {
     deleteBtn.querySelector('.animate-spin').classList.remove('hidden');
     deleteBtn.querySelector('.row-btn').classList.add('hidden');
-
-    // Имитация задержки для демонстрации спиннера в кнопке.
-    await new Promise((resolve) => setTimeout(resolve, 300));
 
     deleteClient(host, obj.id, row);
 
     deleteBtn.querySelector('.animate-spin').classList.add('hidden');
     deleteBtn.querySelector('.row-btn').classList.remove('hidden');
   });
+
+  // Добавляем кнопки в ячейку
+  cellBtns.append(changeBtn, deleteBtn);
+  row.appendChild(cellBtns);
 
   return row;
 }
@@ -161,13 +176,12 @@ function createClientRow(host, obj) {
 function renderTableClient(host, arr) {
   const tableClient = document.getElementById('tableClients');
 
+  // Очищаем таблицу перед рендером
   tableClient.innerHTML = '';
 
-  for (const item of arr) {
-    const rowClient = createClientRow(host, item);
-
-    tableClient.append(rowClient);
-  }
+  // Создаём массив строк и добавляем их в таблицу
+  const rows = arr.map((item) => createClientRow(host, item));
+  tableClient.append(...rows);
 }
 
 // Экспортируем функции

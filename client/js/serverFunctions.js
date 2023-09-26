@@ -1,10 +1,10 @@
 /**
  * Выполняет GET-запрос к указанному серверу и возвращает список клиентов.
  *
- * @param {string} host - URL сервера, на котором размещено API.
- * @returns {Promise<any>}
+ * @param {string} host URL сервера, на котором размещено API.
+ * @returns {Promise<Array>} Список клиентов.
  */
-async function serverGetClienstList(host) {
+async function serverGetClientsList(host) {
   const response = await fetch(host + '/api/clients', {
     method: 'GET',
     headers: {
@@ -18,18 +18,18 @@ async function serverGetClienstList(host) {
 /**
  * Выполняет POST-запрос к указанному серверу и добавляет нового клиента.
  *
- * @param {string} host - URL сервера, на котором размещено API.
- * @param {object} obj - Объект с данными нового клиента.
- * @returns {Promise<Object>} - Объект нового клиента.
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {object} newClientData Объект с данными нового клиента.
+ * @returns {Promise<object>} Объект нового клиента.
  */
-async function serverAddNewClient(host, obj) {
+async function serverAddNewClient(host, newClientData) {
   try {
     const response = await fetch(host + '/api/clients', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(obj),
+      body: JSON.stringify(newClientData),
     });
 
     const result = await response.json();
@@ -49,9 +49,9 @@ async function serverAddNewClient(host, obj) {
 /**
  * Выполняет запрос к указанному серверу и удаляет объект клиента с совпадающим ID.
  *
- * @param {string} host - URL сервера, на котором размещено API.
- * @param {string} id - ID клиента, объект которого необходимо удалить с сервера.
- * @returns {Promise<any>}
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {string} id ID клиента, объект которого необходимо удалить с сервера.
+ * @returns {Promise<object>}
  */
 async function serverDeleteClient(host, id) {
   const response = await fetch(host + '/api/clients/' + id, {
@@ -64,9 +64,9 @@ async function serverDeleteClient(host, id) {
 /**
  * Выполняет GET-запрос к указанному серверу и получает объект клиента с совпадающим ID.
  *
- * @param {string} host - URL сервера, на котором размещено API.
- * @param {string} id - ID клиента, объект которого необходимо получить с сервера.
- * @returns {Promise<Object>} - Объект полученный с сервера.
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {string} id ID клиента, объект которого необходимо получить с сервера.
+ * @returns {Promise<object>} Объект полученный с сервера.
  */
 async function serverGetClient(host, id) {
   const response = await fetch(host + '/api/clients/' + id, {
@@ -79,6 +79,12 @@ async function serverGetClient(host, id) {
   return await response.json();
 }
 
+/**
+ *  Выполняет PATCH-запрос к указанному серверу и изменяет объект клиента с совпадающим ID.
+ * @param host URL сервера, на котором размещено API.
+ * @param obj ID клиента, данные которого необходимо изменить.
+ * @returns {Promise<object>} Измененный объект.
+ */
 async function serverChangeClient(host, obj) {
   try {
     const response = await fetch(host + '/api/clients/' + obj.id, {
@@ -104,4 +110,4 @@ async function serverChangeClient(host, obj) {
 }
 
 // Экспортируем функции
-export { serverGetClienstList, serverAddNewClient, serverGetClient, serverDeleteClient, serverChangeClient };
+export { serverGetClientsList, serverAddNewClient, serverGetClient, serverDeleteClient, serverChangeClient };

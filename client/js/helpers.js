@@ -1,10 +1,11 @@
+// Импортируем функции
 import Inputmask from '../libs/inputmask.es6.js';
 
 /**
  * Форматирует время в UNIX-формате в дату вида dd.mm.yy.
  *
- * @param {String} date - Время в UNIX-формате.
- * @returns {string} - Время в формате dd.mm.yy.
+ * @param {string} date Время в UNIX-формате.
+ * @returns {string} Время в формате dd.mm.yy.
  */
 function formatDate(date) {
   const formattedDate = new Date(date);
@@ -19,8 +20,8 @@ function formatDate(date) {
 /**
  * Форматирует время в UNIX-формате в формат вида hh:mm.
  *
- * @param {String} date - Время в UNIX-формате.
- * @returns {string} - Время в формате hh:mm.
+ * @param {string} date Время в UNIX-формате.
+ * @returns {string} Время в формате hh:mm.
  */
 function formatTime(date) {
   const formattedDate = new Date(date);
@@ -34,8 +35,8 @@ function formatTime(date) {
 /**
  *  Создаёт SVG-иконку в зависимости от типа контакта.
  *
- * @param {String} type - Тип контакта.
- * @returns {string} - HTML-код SVG-иконки.
+ * @param {string} type Тип контакта.
+ * @returns {string} HTML-код SVG-иконки.
  */
 function getIconContact(type) {
   switch (type) {
@@ -70,7 +71,16 @@ function getIconContact(type) {
   }
 }
 
+/**
+ * Изменяет тип поля для ввода контакта.
+ *
+ * @param {HTMLDivElement} select Раскрывающийся список.
+ */
 function changeTypeInput(select) {
+  /**
+   * Изменяет тип и имя поля ввода.
+   * Переключает элементы раскрывающегося списка.
+   */
   function handlerSelect() {
     const targetInput = select.nextElementSibling;
     const dropdown = select.querySelector('.dropdown');
@@ -78,13 +88,16 @@ function changeTypeInput(select) {
     const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
     const selectValue = select.querySelector('.select-text');
 
+    // Открывает или закрывает список в зависимости от состояния
     dropdown.classList.toggle('scale-y-0');
     selectIcon.classList.toggle('rotate-180');
 
+    // Добавляем обработчики событий для каждого элемента списка
     dropdownItems.forEach((item) => {
       item.addEventListener('click', () => {
         const inputType = item.textContent;
 
+        // Меняем данные полей ввода в зависимости от выбранного элемента списка
         switch (inputType) {
           case 'Телефон':
             targetInput.type = 'tel';
@@ -92,6 +105,7 @@ function changeTypeInput(select) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Телефон');
             selectValue.textContent = 'Телефон';
+            // Устанавливаем маску для номера телефона
             if (!targetInput.inputmask) {
               Inputmask('+7 (999) 999-99-99').mask(targetInput);
             }
@@ -103,6 +117,7 @@ function changeTypeInput(select) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Email');
             selectValue.textContent = 'Email';
+            // Удаляем маску с поля ввода, если есть
             if (targetInput.inputmask) {
               targetInput.inputmask.remove();
               targetInput.placeholder = 'Введите данные контакта';
@@ -115,6 +130,7 @@ function changeTypeInput(select) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Facebook');
             selectValue.textContent = 'Facebook';
+            // Удаляем маску с поля ввода, если есть
             if (targetInput.inputmask) {
               targetInput.inputmask.remove();
               targetInput.placeholder = 'Введите данные контакта';
@@ -127,6 +143,7 @@ function changeTypeInput(select) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'VK');
             selectValue.textContent = 'VK';
+            // Удаляем маску с поля ввода, если есть
             if (targetInput.inputmask) {
               targetInput.inputmask.remove();
               targetInput.placeholder = 'Введите данные контакта';
@@ -139,6 +156,7 @@ function changeTypeInput(select) {
             targetInput.value = '';
             targetInput.setAttribute('aria-label', 'Другое');
             selectValue.textContent = 'Другое';
+            // Удаляем маску с поля ввода, если есть
             if (targetInput.inputmask) {
               targetInput.inputmask.remove();
               targetInput.placeholder = 'Введите данные контакта';
@@ -152,10 +170,20 @@ function changeTypeInput(select) {
     });
   }
 
+  // Добавляем обработчик событий к раскрывающемуся списку
   select.addEventListener('click', handlerSelect);
 }
 
+/**
+ *  Создаёт блок с полем ввода и выпадающим списком.
+ *
+ * @param {HTMLDialogElement} modal Модальное окно, в котором необходимо добавить контакт.
+ * @param {string} selectText Начальное значение выпадающего списка.
+ * @param {string} inputValue Значение поля ввода.
+ * @return {HTMLDivElement} HTML-элемент с полем ввода и выпадающим списком.
+ */
 function createContactInputBlock(modal, selectText = 'Телефон', inputValue = '') {
+  // Создаём DOM-элементы
   const blockInput = document.createElement('div');
   const select = document.createElement('div');
   const selectValue = document.createElement('div');
@@ -169,8 +197,8 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   const dropdownItemOther = document.createElement('li');
   const input = document.createElement('input');
   const cancelBtn = document.createElement('button');
-  const svgId = new Date().getTime();
 
+  // Добавляем к элементам CSS-классы и наполняем контентом
   blockInput.classList.add('relative', 'mb-3.5', 'flex', 'last-of-type:mb-6', 'first:mt-4', 'input-contact');
 
   select.classList.add(
@@ -246,10 +274,12 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
     'focus:ring-transparent'
   );
 
+  // Добавляем тип и имя поля ввода в зависимости от контакта
   switch (selectText) {
     case 'Телефон':
       input.type = 'tel';
       input.name = 'phone';
+      // Добавляем маску для номера телефона
       Inputmask('+7 (999) 999-99-99').mask(input);
       break;
     case 'Email':
@@ -275,6 +305,9 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   input.dataset.completed = 'false';
   input.placeholder = 'Введите данные контакта';
 
+  // Создаём ID для SVG иконки
+  const svgId = new Date().getTime();
+
   cancelBtn.classList.add(
     'absolute',
     'right-0',
@@ -296,6 +329,8 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
     blockInput.remove();
   });
 
+  // Добавляем всплывающую подсказку к кнопке удаления контакта
+  /* eslint-disable-next-line no-undef */
   tippy(cancelBtn, {
     content: 'Удалить контакт',
     appendTo: modal,
@@ -304,6 +339,7 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   select.append(dropdown);
   blockInput.append(select, input, cancelBtn);
 
+  // Добавляем обработчик событий к полю ввода для показа или скрытия кнопки удаления контакта
   input.addEventListener('input', () => {
     setTimeout(() => {
       if (input.value) {
@@ -317,6 +353,11 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   return blockInput;
 }
 
+/**
+ * Добавляет поле ввода с выпадающим списком в блок контактов.
+ *
+ * @param {Event} event Событие клика по кнопке.
+ */
 function handlerAddContact(event) {
   event.preventDefault();
 
@@ -327,6 +368,7 @@ function handlerAddContact(event) {
 
   let countInput = blockContacts.querySelectorAll('.form-select').length;
 
+  // Проверяем количество полей ввода, если 10 или больше, то скрываем кнопку добавления контакта
   if (countInput < 10) {
     countInput++;
 
@@ -340,21 +382,33 @@ function handlerAddContact(event) {
   }
 }
 
+/**
+ * Вызывает функцию добавления контакта при клике на кнопку.
+ *
+ * @param {HTMLDialogElement} modal Модальное окно, где необходимо добавить поле контакта.
+ */
 function setContactInput(modal) {
   const btnAddContact = modal.querySelector('.modal-btn-add-contact');
 
   btnAddContact.addEventListener('click', handlerAddContact);
 }
 
+/**
+ * Закрывает модальное окно.
+ *
+ * @param {HTMLDialogElement} modal Модальное окно, которое необходимо закрыть.
+ */
 function closeModal(modal) {
   const cancelBtn = modal.querySelector('.cancel-btn');
   const closeBtn = modal.querySelector('.close-btn');
   const form = modal.querySelector('.form');
   const btnAddContact = modal.querySelector('.modal-btn-add-contact');
 
-  console.log();
-
+  /**
+   * Закрывает модальное окно при клике на кнопку отмены.
+   */
   function handlerCancelModal() {
+    // Сбрасываем поля ввода в форме
     if (form) {
       form.reset();
       btnAddContact.removeEventListener('click', handlerAddContact);
@@ -365,7 +419,11 @@ function closeModal(modal) {
     modal.removeEventListener('click', handlerCloseBackdrop);
   }
 
+  /**
+   * Закрывает модальное окно при клике на крестик.
+   */
   function handlerCloseModal() {
+    // Сбрасываем поля ввода в форме
     if (form) {
       form.reset();
       btnAddContact.removeEventListener('click', handlerAddContact);
@@ -376,11 +434,17 @@ function closeModal(modal) {
     modal.removeEventListener('click', handlerCloseBackdrop);
   }
 
+  // Добавляем обработчики событий к кнопкам
   cancelBtn.addEventListener('click', handlerCancelModal);
-
   closeBtn.addEventListener('click', handlerCloseModal);
 
+  /**
+   * Закрывает модальное окно при клике на подложку.
+   *
+   * @param {Event} event Событие клика по подложке.
+   */
   function handlerCloseBackdrop(event) {
+    // Проверяем совпадение элемента, на который кликнули с модальным окном
     if (event.target === event.currentTarget) {
       if (form) {
         form.reset();
@@ -393,6 +457,7 @@ function closeModal(modal) {
     }
   }
 
+  // Добавляем обработчики событий к модальному окну
   modal.addEventListener('click', handlerCloseBackdrop);
 }
 
