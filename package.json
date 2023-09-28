@@ -4,7 +4,7 @@
   "description": "Учебный проект - CRM-система",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest client",
     "lint:css": "stylelint \"client/css/**/*.css\" --fix",
     "lint:js": "eslint --fix \"client/js/**/*.js\"",
     "tailwindcss": "tailwindcss -i client/css/base.css -o client/css/main.css --watch"
@@ -12,13 +12,18 @@
   "author": "Daniil Grigorev",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.22.20",
     "@tailwindcss/forms": "^0.5.6",
+    "babel-jest": "^29.7.0",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.4.0",
     "eslint-plugin-n": "^16.0.2",
     "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.7.0",
     "prettier": "3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "stylelint": "^15.10.3",
@@ -26,5 +31,10 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-order": "^6.0.3",
     "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/lodash": "^4.14.199",
+    "lodash-es": "^4.17.21"
   }
 }

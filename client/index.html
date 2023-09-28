@@ -31,14 +31,18 @@
     <main class="px-5 lg:container lg:mx-auto">
       <h1 class="visually-hidden">CRM-система</h1>
       <h2 class="mb-[5px] text-lg font-bold md:mb-2.5 md:text-2xl">Клиенты</h2>
-      <div class="mb-10 max-h-[300px] overflow-auto">
+      <div class="mb-10 max-h-[350px] overflow-auto">
         <table class="mx-auto w-[728px] table-fixed border-collapse lg:w-[984px]">
           <thead class="sticky top-0 z-10 bg-[#f5f5f5]">
             <tr>
-              <th class="w-[72px] pb-2.5 pl-5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-20">
+              <th
+                data-name-cell="id"
+                data-direction="true"
+                class="is-active w-[72px] pb-2.5 pl-5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-20"
+              >
                 ID
                 <svg
-                  class="-ml-[3px] inline-block opacity-70 hover:opacity-100"
+                  class="svg-arrow -ml-[3px] inline-block opacity-70 transition-transform duration-200 ease-linear hover:opacity-100"
                   xmlns="http://www.w3.org/2000/svg"
                   width="12"
                   height="12"
@@ -53,33 +57,42 @@
                     </clipPath>
                   </defs>
                 </svg>
-              </th>
-              <th class="w-56 pb-2.5 pl-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-[235px]">
-                Фамилия Имя Отчество
-                <svg
-                  class="peer -ml-[3px] inline-block opacity-70 hover:opacity-100"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  fill="none"
-                >
-                  <g clip-path="url(#a)">
-                    <path fill="#9873FF" d="m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z" />
-                  </g>
-                  <defs>
-                    <clipPath id="a">
-                      <path fill="#fff" d="M0 0h12v12H0z" />
-                    </clipPath>
-                  </defs>
-                </svg>
-                <span class="-ml-[3px] text-[10px] font-semibold text-firm opacity-70 peer-hover:opacity-100">А-Я</span>
               </th>
               <th
+                data-name-cell="surname"
+                data-direction="false"
+                class="w-56 pb-2.5 pl-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-[235px]"
+              >
+                Фамилия Имя Отчество
+                <svg
+                  class="svg-arrow peer -ml-[3px] inline-block opacity-70 transition-transform duration-200 ease-linear hover:opacity-100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  fill="none"
+                >
+                  <g clip-path="url(#a)">
+                    <path fill="#9873FF" d="m10 6-.705-.705L6.5 8.085V2h-1v6.085L2.71 5.29 2 6l4 4 4-4Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="a">
+                      <path fill="#fff" d="M0 0h12v12H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span
+                  class="alphabet-order -ml-[3px] text-[10px] font-semibold text-firm opacity-70 peer-hover:opacity-100"
+                  >А-Я</span
+                >
+              </th>
+              <th
+                data-name-cell="createdAt"
+                data-direction="false"
                 class="relative w-24 pb-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-40 lg:pl-2.5"
               >
                 Дата и время<br />создания
                 <svg
-                  class="absolute bottom-[10px] left-14 inline-block opacity-70 hover:opacity-100 lg:left-16"
+                  class="svg-arrow absolute bottom-[10px] left-14 inline-block opacity-70 transition-transform duration-200 ease-linear hover:opacity-100 lg:left-16"
                   xmlns="http://www.w3.org/2000/svg"
                   width="12"
                   height="12"
@@ -96,11 +109,13 @@
                 </svg>
               </th>
               <th
+                data-name-cell="updatedAt"
+                data-direction="false"
                 class="relative w-24 pb-2.5 text-left align-bottom text-xs font-normal text-txt_grey lg:w-40 lg:pl-2.5"
               >
                 Последние<br />изменения
                 <svg
-                  class="absolute bottom-[10px] inline-block opacity-70 hover:opacity-100"
+                  class="svg-arrow absolute bottom-[10px] inline-block opacity-70 transition-transform duration-200 ease-linear hover:opacity-100"
                   xmlns="http://www.w3.org/2000/svg"
                   width="12"
                   height="12"
