@@ -3,6 +3,7 @@ import { serverGetClientsList } from './serverFunctions.js';
 import { renderTableClient } from './renderTableFunctions.js';
 import { addNewClient, openModalAddClient } from './addNewClientFunctions.js';
 import { renderSortingList } from './sortingFunction/sortingFunction.js';
+import { renderFilteredArray } from './filterFunction/filterFunction.js';
 
 /**
  * Запускает рендер таблицы и необходимые для работы функции.
@@ -20,6 +21,7 @@ async function initialApp() {
   await addNewClient(SERVER__ADDRESS, formAddClient, clientList);
 
   renderSortingList(SERVER__ADDRESS, clientList);
+  renderFilteredArray(SERVER__ADDRESS, clientList);
 
   openModalAddClient();
 }
