@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-named-default
-import { default as filter } from '../../../node_modules/lodash-es/filter.js';
+// Импортируем функции
 import { renderTableClient } from '../renderTableFunctions.js';
 
 const filterArray = (arr, value) => {
-  return filter(arr, (item) => {
+  return arr.filter((item) => {
     const splitValue = value.split(' ');
 
     if (splitValue[2]) {
@@ -35,4 +34,5 @@ function renderFilteredArray(host, arr) {
   });
 }
 
+// Экспортируем функции
 export { filterArray, renderFilteredArray };

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { filterArray } from './filterFunction.js';
 
 describe('Function filterArray:', () => {
