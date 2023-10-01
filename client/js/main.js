@@ -1,9 +1,9 @@
 // Импортируем функции
 import { serverGetClientsList } from './serverFunctions.js';
-import { renderTableClient } from './renderTableFunctions.js';
 import { addNewClient, openModalAddClient } from './addNewClientFunctions.js';
 import { renderSortingList } from './sortingFunction/sortingFunction.js';
 import { renderFilteredArray } from './filterFunction/filterFunction.js';
+import { renderTableClient } from './renderTableFunctions.js';
 
 /**
  * Запускает рендер таблицы и необходимые для работы функции.

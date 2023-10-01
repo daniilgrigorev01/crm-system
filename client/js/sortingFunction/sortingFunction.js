@@ -1,6 +1,5 @@
 // Импортируем функции
-// eslint-disable-next-line import/no-named-default
-import { default as sortBy } from '../../../node_modules/lodash-es/sortBy.js';
+import sortBy from '../../../node_modules/lodash-es/sortBy.js';
 import { renderTableClient } from '../renderTableFunctions.js';
 
 /**
@@ -13,9 +12,9 @@ import { renderTableClient } from '../renderTableFunctions.js';
  */
 const sortingList = (arr, prop, dir = false) => {
   if (dir) {
-    return sortBy(arr, [prop]).reverse();
-  } else {
     return sortBy(arr, [prop]);
+  } else {
+    return sortBy(arr, [prop]).reverse();
   }
 };
 
@@ -48,6 +47,7 @@ function renderSortingList(host, arr) {
 
       // Сортируем и рендерим массив
       const sortedArr = sortingList(arr, cell.dataset.nameCell, cell.dataset.direction === 'true');
+      console.log(sortedArr);
       renderTableClient(host, sortedArr);
     });
   });

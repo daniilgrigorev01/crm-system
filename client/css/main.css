@@ -985,6 +985,10 @@ select {
   z-index: 10;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .-mx-20 {
   margin-left: -5rem;
   margin-right: -5rem;
@@ -1103,6 +1107,10 @@ select {
   margin-top: 0.5rem;
 }
 
+.ml-\[132px\] {
+  margin-left: 132px;
+}
+
 .block {
   display: block;
 }
@@ -1149,6 +1157,10 @@ select {
 
 .h-full {
   height: 100%;
+}
+
+.h-\[300px\] {
+  height: 300px;
 }
 
 .max-h-\[350px\] {
@@ -2081,6 +2093,10 @@ select {
 
   .md\:top-5 {
     top: 1.25rem;
+  }
+
+  .md\:m-auto {
+    margin: auto;
   }
 
   .md\:-mx-7 {
