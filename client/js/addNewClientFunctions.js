@@ -100,6 +100,7 @@ function openModalAddClient() {
     // Очищаем блок с контактами
     blockInput.innerHTML = '';
 
+    modal.classList.add('is-open');
     modal.showModal();
 
     // Запускаем функцию добавления контакта

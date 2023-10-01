@@ -17,6 +17,7 @@ async function openModalChangeClient(host, id) {
   const client = await serverGetClient(host, id);
 
   if (client) {
+    modal.classList.add('is-open');
     modal.showModal();
 
     setContactInput(modal);

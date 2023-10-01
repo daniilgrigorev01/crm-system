@@ -413,6 +413,7 @@ function closeModal(modal) {
       form.reset();
       btnAddContact.removeEventListener('click', handlerAddContact);
     }
+    modal.classList.remove('is-open');
     modal.close();
     cancelBtn.removeEventListener('click', handlerCancelModal);
     closeBtn.removeEventListener('click', handlerCloseModal);
@@ -428,6 +429,7 @@ function closeModal(modal) {
       form.reset();
       btnAddContact.removeEventListener('click', handlerAddContact);
     }
+    modal.classList.remove('is-open');
     modal.close();
     closeBtn.removeEventListener('click', handlerCloseModal);
     cancelBtn.removeEventListener('click', handlerCancelModal);
@@ -450,6 +452,7 @@ function closeModal(modal) {
         form.reset();
         btnAddContact.removeEventListener('click', handlerAddContact);
       }
+      modal.classList.remove('is-open');
       modal.close();
       modal.removeEventListener('click', handlerCloseBackdrop);
       closeBtn.removeEventListener('click', handlerCloseModal);

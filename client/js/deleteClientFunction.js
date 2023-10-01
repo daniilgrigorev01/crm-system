@@ -13,6 +13,7 @@ function deleteClient(host, id, row) {
   const modal = document.getElementById('modalDeleteClient');
   const deleteBtn = modal.querySelector('.action-btn');
 
+  modal.classList.add('is-open');
   modal.showModal();
 
   closeModal(modal);
