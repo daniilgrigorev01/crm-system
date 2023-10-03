@@ -13,7 +13,9 @@ import { getChangeClient, setChangeClient } from './changeClientFunctions.js';
 function createClientRow(host, obj) {
   // Создаём строку таблицы
   const row = document.createElement('tr');
-  row.classList.add('bg-white', 'h-15');
+  row.classList.add('bg-white', 'h-15', 'row-client');
+  row.id = obj.id;
+  row.tabIndex = 0;
 
   /**
    * Создаёт ячейку таблицы с данными.

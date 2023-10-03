@@ -14,9 +14,9 @@
 
     <title>CRM-система</title>
   </head>
-  <body class="bg-[#f5f5f5] font-body text-sm text-black">
+  <body class="body bg-[#f5f5f5] font-body text-sm text-black">
     <header
-      class="mb-[30px] flex h-10 flex-wrap content-center justify-center bg-white shadow-[0_3.38629px_5.64383px_0px_rgba(176,190,197,0.32),_0px_9.03012px_27.09036px_0px_rgba(176,190,197,0.32)] lg:container md:mb-10 md:h-[90px] md:items-center md:justify-start md:px-5 lg:mx-auto"
+      class="relative mb-[30px] flex h-10 flex-wrap content-center justify-center bg-white shadow-[0_3.38629px_5.64383px_0px_rgba(176,190,197,0.32),_0px_9.03012px_27.09036px_0px_rgba(176,190,197,0.32)] lg:container md:mb-10 md:h-[90px] md:items-center md:justify-start md:px-5 lg:mx-auto"
     >
       <a class="block w-6 md:mr-12 md:w-[50px]">
         <img src="./img/logo.png" alt="Skillbus" />
@@ -28,11 +28,12 @@
         placeholder="Введите запрос"
         aria-label="Поиск по таблице"
       />
+      <div class='z-20 absolute top-[66px] left-[118px] filtered-list md:w-[390px] hidden bg-white border border-[rgba(51,51,51,0.20)]'></div>
     </header>
     <main class="px-5 lg:container lg:mx-auto">
       <h1 class="visually-hidden">CRM-система</h1>
       <h2 class="mb-[5px] text-lg font-bold md:mb-2.5 md:text-2xl">Клиенты</h2>
-      <div class="mb-10 max-h-[350px] overflow-auto">
+      <div class="mb-10 max-h-[350px] overflow-auto table-container">
         <table class="mx-auto w-[728px] table-fixed border-collapse lg:w-[984px]">
           <thead class="sticky top-0 z-10 bg-[#f5f5f5]">
             <tr>

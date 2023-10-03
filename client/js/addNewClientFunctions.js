@@ -78,6 +78,7 @@ async function addNewClient(host, form, arr) {
         renderTableClient(host, arr);
 
         modal.close();
+        modal.classList.remove('is-open');
         form.reset();
         btnAddContact.removeEventListener('click', handlerAddContact);
     }

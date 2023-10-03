@@ -47,7 +47,6 @@ function renderSortingList(host, arr) {
 
       // Сортируем и рендерим массив
       const sortedArr = sortingList(arr, cell.dataset.nameCell, cell.dataset.direction === 'true');
-      console.log(sortedArr);
       renderTableClient(host, sortedArr);
     });
   });
