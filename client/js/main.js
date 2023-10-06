@@ -4,6 +4,7 @@ import { addNewClient, openModalAddClient } from './addNewClientFunctions.js';
 import { renderSortingList } from './sortingFunction/sortingFunction.js';
 import { renderFilteredArray } from './filterFunction/filterFunction.js';
 import { renderTableClient } from './renderTableFunctions.js';
+import { syncChangeClient } from './changeClientFunctions.js';
 
 /**
  * Запускает рендер таблицы и необходимые для работы функции.
@@ -24,6 +25,7 @@ async function initialApp() {
   renderFilteredArray(SERVER__ADDRESS, clientList);
 
   openModalAddClient();
+  syncChangeClient(SERVER__ADDRESS);
 }
 
 // Инициализируем приложение

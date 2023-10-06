@@ -20,6 +20,8 @@ async function openModalChangeClient(host, id) {
     modal.classList.add('is-open');
     modal.showModal();
 
+    window.history.pushState({ id }, '', `?id=${id}`);
+
     setContactInput(modal);
 
     closeModal(modal);
@@ -67,6 +69,17 @@ async function getChangeClient(host, id) {
 
       blockContacts.append(contactInput);
     }
+  }
+}
+
+async function syncChangeClient(host) {
+  const search = document.location.search;
+
+  if (search !== '') {
+    const id = search.match(/\d/g).join('');
+
+    await openModalChangeClient(host, id);
+    await getChangeClient(host, id);
   }
 }
 
@@ -149,6 +162,8 @@ function setChangeClient(host, obj) {
     modal.close();
     form.reset();
 
+    window.history.replaceState({}, '', document.location.pathname);
+
     renderTableClient(host, await serverGetClientsList(host));
   }
 
@@ -158,4 +173,4 @@ function setChangeClient(host, obj) {
 }
 
 // Экспортируем функции
-export { getChangeClient, setChangeClient };
+export { getChangeClient, setChangeClient, syncChangeClient };

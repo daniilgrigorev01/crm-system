@@ -22,18 +22,20 @@
         <img src="./img/logo.png" alt="Skillbus" />
       </a>
       <input
-        id='input-search'
+        id="input-search"
         class="hidden border border-[rgba(51,51,51,0.20)] px-4 py-3 placeholder-txt_grey md:inline-block md:h-11 md:w-[580px]"
         type="text"
         placeholder="Введите запрос"
         aria-label="Поиск по таблице"
       />
-      <div class='z-20 absolute top-[66px] left-[118px] filtered-list md:w-[390px] hidden bg-white border border-[rgba(51,51,51,0.20)]'></div>
+      <div
+        class="filtered-list absolute left-[118px] top-[66px] z-20 hidden border border-[rgba(51,51,51,0.20)] bg-white md:w-[390px]"
+      ></div>
     </header>
     <main class="px-5 lg:container lg:mx-auto">
       <h1 class="visually-hidden">CRM-система</h1>
       <h2 class="mb-[5px] text-lg font-bold md:mb-2.5 md:text-2xl">Клиенты</h2>
-      <div class="mb-10 max-h-[350px] overflow-auto table-container">
+      <div class="table-container mb-10 max-h-[350px] overflow-auto">
         <table class="mx-auto w-[728px] table-fixed border-collapse lg:w-[984px]">
           <thead class="sticky top-0 z-10 bg-[#f5f5f5]">
             <tr>
@@ -138,13 +140,25 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-[#c8c5d1]" id="tableClients">
-          <tr>
-            <td colspan='6' class='bg-white h-[300px]'>
-              <svg class='animate-spin md:m-auto ml-[132px]' xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
-                <path stroke="#9873FF" stroke-linecap="round" stroke-miterlimit="10" stroke-width="4" d="M2 20c0 9.941 8.059 18 18 18s18-8.059 18-18S29.941 2 20 2c-2.325 0-4.546.44-6.586 1.243"/>
-              </svg>
-            </td>
-          </tr>
+            <tr>
+              <td colspan="6" class="h-[300px] bg-white">
+                <svg
+                  class="ml-[132px] animate-spin md:m-auto"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  fill="none"
+                >
+                  <path
+                    stroke="#9873FF"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="4"
+                    d="M2 20c0 9.941 8.059 18 18 18s18-8.059 18-18S29.941 2 20 2c-2.325 0-4.546.44-6.586 1.243"
+                  />
+                </svg>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -174,6 +188,7 @@
                 placeholder=" "
                 name="surnameNewClient"
                 id="surnameNewClient"
+                required
                 class="peer w-full border-x-0 border-b border-t-0 border-grey px-0 py-1 focus:border-grey focus:ring-transparent"
               />
               <label
@@ -188,6 +203,7 @@
                 placeholder=" "
                 name="nameNewClient"
                 id="nameNewClient"
+                required
                 class="peer w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0 focus:border-grey focus:ring-transparent"
               />
               <label
@@ -322,6 +338,7 @@
                 placeholder=" "
                 name="surnameChangeClient"
                 id="surnameChangeClient"
+                required
                 class="peer w-full border-x-0 border-b border-t-0 border-grey px-0 py-1 focus:border-grey focus:ring-transparent"
               />
               <label
@@ -336,6 +353,7 @@
                 placeholder=" "
                 name="nameChangeClient"
                 id="nameChangeClient"
+                required
                 class="peer w-full border-x-0 border-b border-t-0 border-grey py-1 pl-0 focus:border-grey focus:ring-transparent"
               />
               <label
