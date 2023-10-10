@@ -69,14 +69,24 @@ async function serverDeleteClient(host, id) {
  * @returns {Promise<object>} Объект полученный с сервера.
  */
 async function serverGetClient(host, id) {
-  const response = await fetch(host + '/api/clients/' + id, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  try {
+    const response = await fetch(host + '/api/clients/' + id, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return await response.json();
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    return error.message;
+  }
 }
 
 /**

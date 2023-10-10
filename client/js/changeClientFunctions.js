@@ -2,6 +2,7 @@
 import { serverChangeClient, serverDeleteClient, serverGetClient, serverGetClientsList } from './serverFunctions.js';
 import { changeTypeInput, closeModal, createContactInputBlock, setContactInput } from './helpers.js';
 import { renderTableClient } from './renderTableFunctions.js';
+import { validationForm } from './validationFunctions/validationFunctions.js';
 
 /**
  * Открывает модальное окно изменения клиента.
@@ -78,8 +79,10 @@ async function syncChangeClient(host) {
   if (search !== '') {
     const id = search.match(/\d/g).join('');
 
-    await openModalChangeClient(host, id);
-    await getChangeClient(host, id);
+    if ((await serverGetClient(host, id)) !== 'Client Not Found') {
+      await openModalChangeClient(host, id);
+      await getChangeClient(host, id);
+    }
   }
 }
 
@@ -106,47 +109,50 @@ function setChangeClient(host, obj) {
   async function handlerSubmitChange(event) {
     event.preventDefault();
 
-    // Изменяем данные в объекте
-    obj.name = inputName.value.trim();
-    obj.surname = inputSurname.value.trim();
-    obj.lastName = inputPatronymic.value.trim();
+    if (validationForm(form)) {
+      // Изменяем данные в объекте
+      obj.name = inputName.value.trim();
+      obj.surname = inputSurname.value.trim();
+      obj.lastName = inputPatronymic.value.trim();
 
-    const contactsInput = form.querySelectorAll('.modal-contacts-input');
+      const contactsInput = form.querySelectorAll('.modal-contacts-input');
 
-    if (contactsInput.length !== 0) {
-      obj.contacts = Array.from(contactsInput).map((input) => {
-        const contactType = input.getAttribute('aria-label');
-        const contactValue = input.value;
+      if (contactsInput.length !== 0) {
+        obj.contacts = Array.from(contactsInput).map((input) => {
+          const contactType = input.getAttribute('aria-label');
+          const contactValue = input.value;
 
-        return {
-          type: contactType,
-          value: contactValue,
-        };
-      });
-    } else {
-      obj.contacts = [];
-    }
+          return {
+            type: contactType,
+            value: contactValue,
+          };
+        });
+      } else {
+        obj.contacts = [];
+      }
 
-    const result = await serverChangeClient(host, obj);
+      const result = await serverChangeClient(host, obj);
 
-    // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
-    switch (result) {
-      case 'Не указано имя':
-        errorText.textContent = 'Не указано имя';
-        break;
-      case 'Не указана фамилия':
-        errorText.textContent = 'Не указана фамилия';
-        break;
-      case 'Не все добавленные контакты полностью заполнены':
-        errorText.textContent = 'Не все добавленные контакты полностью заполнены';
-        break;
-      default:
-        modal.close();
-        form.reset();
+      // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
+      switch (result) {
+        case 'Не указано имя':
+          errorText.textContent = 'Не указано имя';
+          break;
+        case 'Не указана фамилия':
+          errorText.textContent = 'Не указана фамилия';
+          break;
+        case 'Не все добавленные контакты полностью заполнены':
+          errorText.textContent = 'Не все добавленные контакты полностью заполнены';
+          break;
+        default:
+          modal.close();
+          form.reset();
+          modal.classList.remove('is-open');
 
-        form.removeEventListener('submit', handlerSubmitChange);
+          form.removeEventListener('submit', handlerSubmitChange);
 
-        renderTableClient(host, await serverGetClientsList(host));
+          renderTableClient(host, await serverGetClientsList(host));
+      }
     }
   }
 

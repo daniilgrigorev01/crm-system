@@ -197,6 +197,7 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   const dropdownItemOther = document.createElement('li');
   const input = document.createElement('input');
   const cancelBtn = document.createElement('button');
+  const errorText = document.createElement('span');
 
   // Добавляем к элементам CSS-классы и наполняем контентом
   blockInput.classList.add('relative', 'mb-3.5', 'flex', 'last-of-type:mb-6', 'first:mt-4', 'input-contact');
@@ -205,6 +206,7 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
     'form-select',
     'w-40',
     'border-grey',
+    'border-r-transparent',
     'bg-[#e7e5eb]',
     'bg-none',
     'relative',
@@ -261,9 +263,7 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   input.classList.add(
     'modal-contacts-input',
     'w-full',
-    'border-l-0',
-    'border-r-grey',
-    'border-y-grey',
+    'border-grey',
     'bg-transparent',
     'py-2',
     'pl-1.5',
@@ -304,6 +304,19 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   input.setAttribute('aria-label', selectText);
   input.dataset.completed = 'false';
   input.placeholder = 'Введите данные контакта';
+  input.required = true;
+
+  errorText.classList.add(
+    'error-text',
+    'text-red-700',
+    'text-xs',
+    'absolute',
+    '-bottom-[15px]',
+    'right-2/4',
+    'translate-x-2/4',
+    'hidden'
+  );
+  errorText.textContent = 'Заполните поле';
 
   // Создаём ID для SVG иконки
   const svgId = new Date().getTime();
@@ -337,7 +350,7 @@ function createContactInputBlock(modal, selectText = 'Телефон', inputValu
   });
 
   select.append(dropdown);
-  blockInput.append(select, input, cancelBtn);
+  blockInput.append(select, input, cancelBtn, errorText);
 
   // Добавляем обработчик событий к полю ввода для показа или скрытия кнопки удаления контакта
   input.addEventListener('input', () => {

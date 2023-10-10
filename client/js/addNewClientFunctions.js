@@ -2,6 +2,7 @@
 import { serverAddNewClient, serverGetClientsList } from './serverFunctions.js';
 import { renderTableClient } from './renderTableFunctions.js';
 import { closeModal, handlerAddContact, setContactInput } from './helpers.js';
+import { validationForm } from './validationFunctions/validationFunctions.js';
 
 /**
  * Создаёт объект на основе данных, полученных из формы добавления клиента.
@@ -59,28 +60,30 @@ async function addNewClient(host, form, arr) {
 
     btnSubmit.querySelector('.animate-spin').classList.remove('hidden');
 
-    const result = await serverAddNewClient(host, createObjectNewClient(form));
+    if (validationForm(form)) {
+      const result = await serverAddNewClient(host, createObjectNewClient(form));
 
-    // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
-    switch (result) {
-      case 'Не указано имя':
-        errorText.textContent = 'Не указано имя';
-        break;
-      case 'Не указана фамилия':
-        errorText.textContent = 'Не указана фамилия';
-        break;
-      case 'Не все добавленные контакты полностью заполнены':
-        errorText.textContent = 'Не все добавленные контакты полностью заполнены';
-        break;
-      default:
-        arr = await serverGetClientsList(host);
+      // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
+      switch (result) {
+        case 'Не указано имя':
+          errorText.textContent = 'Не указано имя';
+          break;
+        case 'Не указана фамилия':
+          errorText.textContent = 'Не указана фамилия';
+          break;
+        case 'Не все добавленные контакты полностью заполнены':
+          errorText.textContent = 'Не все добавленные контакты полностью заполнены';
+          break;
+        default:
+          arr = await serverGetClientsList(host);
 
-        renderTableClient(host, arr);
+          renderTableClient(host, arr);
 
-        modal.close();
-        modal.classList.remove('is-open');
-        form.reset();
-        btnAddContact.removeEventListener('click', handlerAddContact);
+          modal.close();
+          modal.classList.remove('is-open');
+          form.reset();
+          btnAddContact.removeEventListener('click', handlerAddContact);
+      }
     }
 
     btnSubmit.querySelector('.animate-spin').classList.add('hidden');

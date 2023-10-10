@@ -30,6 +30,7 @@ function deleteClient(host, id, row) {
 
     row.remove();
     modal.close();
+    modal.classList.remove('is-open');
 
     deleteBtn.removeEventListener('click', handleDelete);
   }

@@ -25,7 +25,7 @@ async function initialApp() {
   renderFilteredArray(SERVER__ADDRESS, clientList);
 
   openModalAddClient();
-  syncChangeClient(SERVER__ADDRESS);
+  await syncChangeClient(SERVER__ADDRESS);
 }
 
 // Инициализируем приложение
