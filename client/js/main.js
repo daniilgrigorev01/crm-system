@@ -13,17 +13,17 @@ async function initialApp() {
   const SERVER__ADDRESS = 'http://localhost:3000';
   const formAddClient = document.getElementById('formAddNewClient');
 
+  // Получаем актуальный список клиентов
   const clientList = await serverGetClientsList(SERVER__ADDRESS);
 
   if (clientList.length !== 0) {
     renderTableClient(SERVER__ADDRESS, clientList);
   }
 
+  // Запускаем базовые функции
   await addNewClient(SERVER__ADDRESS, formAddClient, clientList);
-
   renderSortingList(SERVER__ADDRESS, clientList);
   renderFilteredArray(SERVER__ADDRESS, clientList);
-
   openModalAddClient();
   await syncChangeClient(SERVER__ADDRESS);
 }

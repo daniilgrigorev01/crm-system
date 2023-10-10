@@ -28,6 +28,12 @@ const filterArray = (arr, value) => {
   });
 };
 
+/**
+ * Создаёт отсортированный по имени и фамилии список клиентов.
+ *
+ * @param {object[]} arr Массив клиентов, который необходимо отсортировать.
+ * @return {HTMLUListElement} Отсортированный список клиентов.
+ */
 function createFilteredListItem(arr) {
   const blockFilteredList = document.querySelector('.filtered-list');
   const filteredList = document.createElement('ul');
@@ -77,10 +83,17 @@ function createFilteredListItem(arr) {
   return filteredList;
 }
 
+/**
+ * Рендерит отсортированный список клиентов при вводе значения в поле поиска.
+ *
+ * @param {string} host URL сервера, на котором размещено API.
+ * @param {object[]} arr Массив клиентов, который необходимо отсортировать.
+ */
 function renderFilteredArray(host, arr) {
   const inputSearch = document.querySelector('#input-search');
   const blockFilteredList = document.querySelector('.filtered-list');
 
+  // Добавляем обработчик событий на поле поиска
   inputSearch.addEventListener('input', () => {
     if (inputSearch.value !== '') {
       setTimeout(() => {
