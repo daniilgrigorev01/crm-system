@@ -61,8 +61,6 @@ async function addNewClient(host, form, arr) {
     btnSubmit.querySelector('.animate-spin').classList.remove('hidden');
 
     if (validationForm(form)) {
-      console.log(validationForm(form));
-
       const result = await serverAddNewClient(host, createObjectNewClient(form));
 
       // Если от сервера пришёл ответ с ошибкой, то выводим ее текст, иначе запускаем рендер таблицы с новыми данными
